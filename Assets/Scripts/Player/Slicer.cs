@@ -20,7 +20,7 @@ public class Slicer : MonoBehaviour
     /// </summary>
     /// <param name="plane"></param>
     /// <param name="objectToCut"></param>
-    /// <returns></returns>
+    /// <returns> Array of cut objects </returns>
     public static GameObject[] Slice(Plane plane, GameObject objectToCut)
     {
         //Get the current mesh and its verts and tris
@@ -30,11 +30,16 @@ public class Slicer : MonoBehaviour
 
         if (sliceable == null)
         {
-            throw new NotSupportedException("Cannot slice non sliceable object, add the sliceable script to the object or inherit from sliceable to support slicing");
+            throw new NotSupportedException("Cannot slice non sliceable " +
+                "object, add the sliceable script to the object or inherit " +
+                "from sliceable to support slicing");
         }
 
         //Create left and right slice of hollow object
-        SlicesMetadata slicesMeta = new SlicesMetadata(plane, mesh, sliceable.IsSolid, sliceable.ReverseWireTriangles, sliceable.ShareVertices, sliceable.SmoothVertices);
+        SlicesMetadata slicesMeta = 
+            new SlicesMetadata(plane, mesh, sliceable.IsSolid, 
+            sliceable.ReverseWireTriangles, sliceable.ShareVertices, 
+            sliceable.SmoothVertices);
 
         GameObject positiveObject = CreateMeshGameObject(objectToCut);
         positiveObject.name = string.Format("{0}_positive", objectToCut.name);
@@ -48,8 +53,10 @@ public class Slicer : MonoBehaviour
         positiveObject.GetComponent<MeshFilter>().mesh = positiveSideMeshData;
         negativeObject.GetComponent<MeshFilter>().mesh = negativeSideMeshData;
 
-        SetupCollidersAndRigidBodys(ref positiveObject, positiveSideMeshData, sliceable.UseGravity);
-        SetupCollidersAndRigidBodys(ref negativeObject, negativeSideMeshData, sliceable.UseGravity);
+        SetupCollidersAndRigidBodys(ref positiveObject, positiveSideMeshData, 
+            sliceable.UseGravity);
+        SetupCollidersAndRigidBodys(ref negativeObject, negativeSideMeshData, 
+            sliceable.UseGravity);
 
         return new GameObject[] { positiveObject, negativeObject };
     }
@@ -61,7 +68,8 @@ public class Slicer : MonoBehaviour
     /// <returns></returns>
     private static GameObject CreateMeshGameObject(GameObject originalObject)
     {
-        var originalMaterial = originalObject.GetComponent<MeshRenderer>().materials;
+        var originalMaterial =
+            originalObject.GetComponent<MeshRenderer>().materials;
 
         GameObject meshGameObject = new GameObject();
         Sliceable originalSliceable = originalObject.GetComponent<Sliceable>();
@@ -71,12 +79,15 @@ public class Slicer : MonoBehaviour
         Sliceable sliceable = meshGameObject.AddComponent<Sliceable>();
 
         sliceable.IsSolid = originalSliceable.IsSolid;
-        sliceable.ReverseWireTriangles = originalSliceable.ReverseWireTriangles;
+        sliceable.ReverseWireTriangles =
+            originalSliceable.ReverseWireTriangles;
         sliceable.UseGravity = originalSliceable.UseGravity;
 
-        meshGameObject.GetComponent<MeshRenderer>().materials = originalMaterial;
+        meshGameObject.GetComponent<MeshRenderer>().materials =
+            originalMaterial;
 
-        meshGameObject.transform.localScale = originalObject.transform.localScale;
+        meshGameObject.transform.localScale =
+            originalObject.transform.localScale;
         meshGameObject.transform.rotation = originalObject.transform.rotation;
         meshGameObject.transform.position = originalObject.transform.position;
 
@@ -90,7 +101,8 @@ public class Slicer : MonoBehaviour
     /// </summary>
     /// <param name="gameObject"></param>
     /// <param name="mesh"></param>
-    private static void SetupCollidersAndRigidBodys(ref GameObject gameObject, Mesh mesh, bool useGravity)
+    private static void SetupCollidersAndRigidBodys(ref GameObject gameObject, 
+        Mesh mesh, bool useGravity)
     {
         MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
         meshCollider.sharedMesh = mesh;

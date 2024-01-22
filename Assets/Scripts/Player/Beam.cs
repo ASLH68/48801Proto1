@@ -108,8 +108,8 @@ public class Beam : MonoBehaviour
         _triangles[_frameCount + 10] = _frameCount + 10;
         _triangles[_frameCount + 11] = _frameCount + 11;
 
-        _meshParent.GetComponent<MeshFilter>().mesh.vertices = _vertices;
-        _meshParent.GetComponent<MeshFilter>().mesh.triangles = _triangles;
+       /* _meshParent.GetComponent<MeshFilter>().mesh.vertices = _vertices;
+        _meshParent.GetComponent<MeshFilter>().mesh.triangles = _triangles;*/
 
         //Track the previous base and tip positions for the next frame
         _previousTipPosition = _tip.transform.position;
@@ -119,7 +119,6 @@ public class Beam : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("enter");
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
     }
@@ -128,7 +127,8 @@ public class Beam : MonoBehaviour
     {
         _triggerExitTipPosition = _tip.transform.position;
 
-        //Create a triangle between the tip and base so that we can get the normal
+        //Create a triangle between the tip and base so that we can get the
+        //normal
         Vector3 side1 = _triggerExitTipPosition - _triggerEnterTipPosition;
         Vector3 side2 = _triggerExitTipPosition - _triggerEnterBasePosition;
 
@@ -136,11 +136,16 @@ public class Beam : MonoBehaviour
         //https://docs.unity3d.com/Manual/ComputingNormalPerpendicularVector.html
         Vector3 normal = Vector3.Cross(side1, side2).normalized;
 
-        //Transform the normal so that it is aligned with the object we are slicing's transform.
-        Vector3 transformedNormal = ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose * normal)).normalized;
+        //Transform the normal so that it is aligned with the object we are
+        //slicing's transform.
+        Vector3 transformedNormal = 
+            ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose 
+            * normal)).normalized;
 
-        //Get the enter position relative to the object we're cutting's local transform
-        Vector3 transformedStartingPoint = other.gameObject.transform.InverseTransformPoint(_triggerEnterTipPosition);
+        //Get the enter position relative to the object we're cutting's local
+        //transform
+        Vector3 transformedStartingPoint = 
+            other.gameObject.transform.InverseTransformPoint(_triggerEnterTipPosition);
 
         Plane plane = new Plane();
 
@@ -160,29 +165,16 @@ public class Beam : MonoBehaviour
         foreach(GameObject slice in slices )
         {
             slice.AddComponent<Sliceable>();
+            slice.GetComponent<Sliceable>().UseGravity = true;
+            slice.GetComponent<Sliceable>().SmoothVertices = true;
+            slice.GetComponent<Sliceable>().ShareVertices = true;
         }
         Destroy(other.gameObject);
 
         Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
-        Vector3 newNormal = transformedNormal + Vector3.up * _forceAppliedToCut;
+        Vector3 newNormal = transformedNormal + Vector3.up * 
+            _forceAppliedToCut;
         rigidbody.AddForce(newNormal, ForceMode.Impulse);
 
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(MoveObj());
-        }
-    }
-
-    private IEnumerator MoveObj()
-    {
-        while (transform.position.x > -3.5)
-        {
-            transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y, transform.position.z);
-            yield return null;
-        }
     }
 }
