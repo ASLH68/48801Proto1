@@ -6,12 +6,14 @@ using UnityEngine;
 public class Sliceable : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("Will the new shapes be hollow")]
     private bool _isSolid = true;
 
     [SerializeField]
     private bool _reverseWindTriangles = false;
 
     [SerializeField]
+    [Tooltip("Do the new shapes have gravity?")] 
     private bool _useGravity = false;
 
     [SerializeField]

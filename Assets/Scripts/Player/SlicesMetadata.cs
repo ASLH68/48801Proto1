@@ -392,7 +392,7 @@ namespace Assets.Scripts
 
             for (int i = 0; i < meshTriangles.Length; i += 3)
             {
-                //We need the verts in order so that we know which way to wind our new mesh triangles.
+                //We need the verts in order so that we know which way to wind our new mesh triangles. cylinder
                 Vector3 vert1 = meshVerts[meshTriangles[i]];
                 int vert1Index = Array.IndexOf(meshVerts, vert1);
                 Vector2 uv1 = meshUvs[vert1Index];

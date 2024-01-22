@@ -79,7 +79,7 @@ public class Beam : MonoBehaviour
         }
 
         //Draw first triangle vertices for back and front
-        _vertices[_frameCount] = _base.transform.position;
+/*        _vertices[_frameCount] = _base.transform.position;
         _vertices[_frameCount + 1] = _tip.transform.position;
         _vertices[_frameCount + 2] = _previousTipPosition;
         _vertices[_frameCount + 3] = _base.transform.position;
@@ -106,7 +106,7 @@ public class Beam : MonoBehaviour
         _triangles[_frameCount + 8] = _frameCount + 8;
         _triangles[_frameCount + 9] = _frameCount + 9;
         _triangles[_frameCount + 10] = _frameCount + 10;
-        _triangles[_frameCount + 11] = _frameCount + 11;
+        _triangles[_frameCount + 11] = _frameCount + 11;*/
 
        /* _meshParent.GetComponent<MeshFilter>().mesh.vertices = _vertices;
         _meshParent.GetComponent<MeshFilter>().mesh.triangles = _triangles;*/
