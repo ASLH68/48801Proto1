@@ -27,7 +27,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -45,15 +45,16 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _BottomPower: 1
+    - _BottomPower: 0.5
     - _FresnelPower: 1
     - _Metallic: 0
     - _Smoothness: 0
     m_Colors:
     - _BottomRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _FresnelColor: {r: 1, g: 1, b: 1, a: 0}
+    - _FresnelColor: {r: 1, g: 0.3529681, b: 0, a: 1}
     - _LavaColor: {r: 6.943396, g: 0.8119732, b: 0, a: 1}
     - _LavaNormalSpeed: {r: 0, g: 0.05, b: 0, a: 0}
-    - _LavaScale: {r: 2, g: 2, b: 0, a: 0}
+    - _LavaRemap: {r: 0, g: 1, b: 0, a: 0}
+    - _LavaScale: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _LavaSpeed: {r: 0, g: 0.1, b: 0, a: 0}
   m_BuildTextureStacks: []
