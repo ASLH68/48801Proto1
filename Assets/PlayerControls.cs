@@ -53,6 +53,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecb2e666-1786-42cb-8482-894b5cc0216c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c6fd594-9155-4bb4-b5a7-8a1d007a864e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_BasicControls_Move = m_BasicControls.FindAction("Move", throwIfNotFound: true);
         m_BasicControls_Slash = m_BasicControls.FindAction("Slash", throwIfNotFound: true);
         m_BasicControls_Look = m_BasicControls.FindAction("Look", throwIfNotFound: true);
+        m_BasicControls_Jump = m_BasicControls.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,6 +226,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_BasicControls_Move;
     private readonly InputAction m_BasicControls_Slash;
     private readonly InputAction m_BasicControls_Look;
+    private readonly InputAction m_BasicControls_Jump;
     public struct BasicControlsActions
     {
         private @PlayerControls m_Wrapper;
@@ -212,6 +234,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_BasicControls_Move;
         public InputAction @Slash => m_Wrapper.m_BasicControls_Slash;
         public InputAction @Look => m_Wrapper.m_BasicControls_Look;
+        public InputAction @Jump => m_Wrapper.m_BasicControls_Jump;
         public InputActionMap Get() { return m_Wrapper.m_BasicControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -230,6 +253,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnLook;
+                @Jump.started -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_BasicControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -243,6 +269,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -252,5 +281,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnSlash(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
