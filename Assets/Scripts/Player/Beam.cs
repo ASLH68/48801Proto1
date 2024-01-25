@@ -220,6 +220,11 @@ public class Beam : MonoBehaviour
             slice.GetComponent<Sliceable>().ForceApplied = T.ForceApplied;
         }
 
+        // Calls any actions that happen when an object is sliced
+        if(other.TryGetComponent<OnSliced>(out OnSliced Sliced))
+        {
+            Sliced.SlicedAction();
+        }
         //other.GetComponent<Sliceable>().UseGravity = false;
 
         Destroy(other.gameObject);
