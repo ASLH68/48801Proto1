@@ -28,12 +28,12 @@ public class Slicer : MonoBehaviour
         var a = mesh.GetSubMesh(0);
         Sliceable sliceable = objectToCut.GetComponent<Sliceable>();
 
-        /*if (sliceable == null)
+        if (sliceable == null)
         {
             throw new NotSupportedException("Cannot slice non sliceable " +
                 "object, add the sliceable script to the object or inherit " +
                 "from sliceable to support slicing");
-        }*/
+        }
 
         //Create left and right slice of hollow object
         SlicesMetadata slicesMeta = 
@@ -92,7 +92,7 @@ public class Slicer : MonoBehaviour
         meshGameObject.transform.position = originalObject.transform.position;
 
         meshGameObject.tag = originalObject.tag;
-
+        
         return meshGameObject;
     }
 

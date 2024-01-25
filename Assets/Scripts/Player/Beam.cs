@@ -1,10 +1,14 @@
 using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Beam : MonoBehaviour
 {
+    private static Beam _instance;
     //The number of vertices to create per frame
     private const int NUM_VERTICES = 12;
 
@@ -33,9 +37,9 @@ public class Beam : MonoBehaviour
     [Tooltip("The colour of the blade and trail")]
     private Color _colour = Color.red;
 
-    [SerializeField]
+/*    [SerializeField]
     [Tooltip("The amount of force applied to each side of a slice")]
-    private float _forceAppliedToCut = 3f;
+    private float _forceAppliedToCut = 3f;*/
 
     private Mesh _mesh;
     private Vector3[] _vertices;
@@ -46,6 +50,40 @@ public class Beam : MonoBehaviour
     private Vector3 _triggerEnterTipPosition;
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
+
+    [SerializeField][Tooltip("Force applied when cut")]
+    private float _defaultForce;
+
+    #region Getters/Setters
+    public float DefaultForce
+    {
+        get
+        {
+            return _defaultForce;
+        }
+        set
+        {
+            _defaultForce = value;
+        }
+    }
+    #endregion
+
+    public static Beam Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                Debug.LogError("Instance of Beam is null");
+            }
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
 
     void Start()
     {
@@ -119,6 +157,7 @@ public class Beam : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("enter");
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
     }
@@ -161,20 +200,34 @@ public class Beam : MonoBehaviour
             plane = plane.flipped;
         }
 
+        float force;
+        if (other.TryGetComponent<Sliceable>(out Sliceable T))
+        {
+            force = T.ForceApplied;
+        }
+        else
+        {
+            force = DefaultForce;
+        }
+
         GameObject[] slices = Slicer.Slice(plane, other.gameObject);
         foreach(GameObject slice in slices )
         {
-            slice.AddComponent<Sliceable>();
-            slice.GetComponent<Sliceable>().UseGravity = true;
-            slice.GetComponent<Sliceable>().SmoothVertices = true;
-            slice.GetComponent<Sliceable>().ShareVertices = true;
+            // sliced halves can be sliced again
+            slice.GetComponent<Sliceable>().UseGravity = T.UseGravity;
+            slice.GetComponent<Sliceable>().SmoothVertices = T.SmoothVertices;
+            slice.GetComponent<Sliceable>().ShareVertices = T.ShareVertices;
+            slice.GetComponent<Sliceable>().ForceApplied = T.ForceApplied;
         }
+
+        //other.GetComponent<Sliceable>().UseGravity = false;
+
         Destroy(other.gameObject);
 
         Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
-        Vector3 newNormal = transformedNormal + Vector3.up * 
-            _forceAppliedToCut;
-        rigidbody.AddForce(newNormal, ForceMode.Impulse);
+        Vector3 newNormal = transformedNormal + Vector3.up *
+            force;
 
+        rigidbody.AddForce(newNormal, ForceMode.Impulse);
     }
 }
