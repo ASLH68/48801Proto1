@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3159639669555624931}
   - component: {fileID: 4370729456405224867}
   - component: {fileID: 2253581316550325204}
+  - component: {fileID: 8519959952031051838}
   m_Layer: 0
   m_Name: Sliceable
   m_TagString: Untagged
@@ -113,5 +114,19 @@ MonoBehaviour:
   _isSolid: 1
   _reverseWindTriangles: 0
   _useGravity: 1
-  _shareVertices: 0
-  _smoothVertices: 0
+  _shareVertices: 1
+  _smoothVertices: 1
+  _forceApplied: 6
+--- !u!114 &8519959952031051838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227923327580764748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6583f6137c846664e9a678279e8c5361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: 
