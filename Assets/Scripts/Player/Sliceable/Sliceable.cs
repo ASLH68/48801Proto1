@@ -14,13 +14,17 @@ public class Sliceable : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Do the new shapes have gravity?")] 
-    private bool _useGravity = false;
+    private bool _useGravity = true;
 
     [SerializeField]
     private bool _shareVertices = false;
 
     [SerializeField]
     private bool _smoothVertices = false;
+
+    [SerializeField]
+    [Tooltip("Force applied when cut")]
+    public float _forceApplied;
 
     public bool IsSolid
     {
@@ -79,6 +83,25 @@ public class Sliceable : MonoBehaviour
         set
         {
             _smoothVertices = value;
+        }
+    }
+
+    public float ForceApplied
+    {
+        get
+        {
+            if(Beam.Instance.DefaultForce != _forceApplied)
+            {
+                return _forceApplied;
+            }
+            else
+            {
+                return Beam.Instance.DefaultForce;
+            }
+        }
+        set
+        {
+            _forceApplied = value;
         }
     }
 }

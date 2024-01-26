@@ -105,6 +105,8 @@ namespace Assets.Scripts
             ComputeNewMeshes();
         }
 
+        
+
         /// <summary>
         /// Add the mesh data to the correct side and calulate normals
         /// </summary>
