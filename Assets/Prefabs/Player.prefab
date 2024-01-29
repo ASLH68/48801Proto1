@@ -143,7 +143,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.1
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -161,10 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58946de553462ec46aad589f2365e628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  jumpHeight: 0.005
-  mainCamera: {fileID: 0}
-  laser: {fileID: 0}
+  moveSpeed: 3
+  jumpForce: 0.25
   groundMask:
     serializedVersion: 2
     m_Bits: 8
