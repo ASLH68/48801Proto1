@@ -62,6 +62,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""3733f2d6-4a5e-4112-9766-a891b2dada18"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c33de0d-6da4-4722-a1a8-91bdda7c4735"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d77db3f-2589-46d8-b2bc-a08dc24e28d6"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23e50a33-4cdc-40ae-b0e7-b8c99aed8ad0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +204,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_BasicControls_Slash = m_BasicControls.FindAction("Slash", throwIfNotFound: true);
         m_BasicControls_Look = m_BasicControls.FindAction("Look", throwIfNotFound: true);
         m_BasicControls_Jump = m_BasicControls.FindAction("Jump", throwIfNotFound: true);
+        m_BasicControls_Reset = m_BasicControls.FindAction("Reset", throwIfNotFound: true);
+        m_BasicControls_Quit = m_BasicControls.FindAction("Quit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +269,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_BasicControls_Slash;
     private readonly InputAction m_BasicControls_Look;
     private readonly InputAction m_BasicControls_Jump;
+    private readonly InputAction m_BasicControls_Reset;
+    private readonly InputAction m_BasicControls_Quit;
     public struct BasicControlsActions
     {
         private @PlayerControls m_Wrapper;
@@ -235,6 +279,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Slash => m_Wrapper.m_BasicControls_Slash;
         public InputAction @Look => m_Wrapper.m_BasicControls_Look;
         public InputAction @Jump => m_Wrapper.m_BasicControls_Jump;
+        public InputAction @Reset => m_Wrapper.m_BasicControls_Reset;
+        public InputAction @Quit => m_Wrapper.m_BasicControls_Quit;
         public InputActionMap Get() { return m_Wrapper.m_BasicControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +302,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnJump;
+                @Reset.started -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnReset;
+                @Reset.performed -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnReset;
+                @Reset.canceled -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnReset;
+                @Quit.started -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_BasicControlsActionsCallbackInterface.OnQuit;
             }
             m_Wrapper.m_BasicControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -272,6 +324,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Reset.started += instance.OnReset;
+                @Reset.performed += instance.OnReset;
+                @Reset.canceled += instance.OnReset;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
             }
         }
     }
@@ -282,5 +340,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnSlash(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
     }
 }

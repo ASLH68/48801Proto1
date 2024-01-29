@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
@@ -10,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpHeight;
   
     PlayerControls playerControls;
-    InputAction move, slash, jump;
+    InputAction move, slash, jump, reset, quit;
 
     Rigidbody rb;
     [SerializeField] CinemachineVirtualCamera mainCamera;
@@ -36,6 +37,8 @@ public class PlayerController : MonoBehaviour
         move = playerControls.FindAction("Move");
         slash = playerControls.FindAction("Slash");
         jump = playerControls.FindAction("Jump");
+        reset = playerControls.FindAction("Reset");
+        quit = playerControls.FindAction("Quit");
 
         move.performed += ctx => moveDirection = move.ReadValue<Vector2>();
         move.canceled += ctx => moveDirection = move.ReadValue<Vector2>();
@@ -70,6 +73,15 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             float verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
             rb.AddForce(new Vector3(0, verticalVelocity, 0), ForceMode.Impulse);
+        }
+
+        if (reset.IsPressed())
+        {
+            SceneManager.LoadScene(1);
+        }
+        if (quit.IsPressed())
+        {
+            Application.Quit();
         }
 
         // Player Rotation
