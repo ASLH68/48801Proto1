@@ -8,14 +8,14 @@ using Cinemachine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
-    [SerializeField] float jumpHeight;
+    [SerializeField] float jumpForce;
   
     PlayerControls playerControls;
     InputAction move, slash, jump, reset, quit;
 
     Rigidbody rb;
-    [SerializeField] CinemachineVirtualCamera mainCamera;
-    [SerializeField] GameObject laser;
+    CinemachineVirtualCamera mainCamera;
+    GameObject laser;
 
     Vector2 moveDirection;
     Vector3 velocity;
@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         rb = gameObject.GetComponent<Rigidbody>();
+        mainCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        laser = mainCamera.transform.GetChild(0).gameObject;
 
         playerControls = new PlayerControls();
         playerControls.BasicControls.Enable();
@@ -53,14 +55,14 @@ public class PlayerController : MonoBehaviour
         // Player Movement
         velocity = transform.right * moveDirection.x + transform.forward * moveDirection.y;
         velocity = velocity.normalized;
-        rb.AddForce(velocity * moveSpeed, ForceMode.Acceleration);
+        rb.AddForce(velocity * moveSpeed);
 
         float speed = rb.velocity.magnitude;
         if (speed > 5)
         {
             float brakeSpeed = speed - 5;
             Vector3 brakingVelocity = rb.velocity.normalized * brakeSpeed;
-            rb.AddForce(-brakingVelocity, ForceMode.Acceleration);
+            rb.AddForce(-brakingVelocity);
         }
 
         // Ground Check
@@ -71,13 +73,13 @@ public class PlayerController : MonoBehaviour
         if (jump.IsPressed() && isGrounded)
         {
             isGrounded = false;
-            float verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
-            rb.AddForce(new Vector3(0, verticalVelocity, 0), ForceMode.Impulse);
+            //float verticalVelocity = Mathf.Sqrt(jumpHeight *  Physics.gravity.y);
+            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
         if (reset.IsPressed())
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         if (quit.IsPressed())
         {
