@@ -37,6 +37,7 @@ public class Beam : MonoBehaviour
     [Tooltip("The colour of the blade and trail")]
     private Color _colour = Color.red;
 
+    [SerializeField] PhysicMaterial _slipperyMat;
 /*    [SerializeField]
     [Tooltip("The amount of force applied to each side of a slice")]
     private float _forceAppliedToCut = 3f;*/
@@ -220,7 +221,10 @@ public class Beam : MonoBehaviour
             slice.GetComponent<Sliceable>().Despawn = T.Despawn;
             slice.GetComponent<Sliceable>().RemoveColliders= T.RemoveColliders;
 
-            if(slice.GetComponent<Sliceable>().RemoveColliders)
+            // Adds slippery mat
+            //slice.GetComponent<MeshCollider>().material = _slipperyMat;
+
+            if (slice.GetComponent<Sliceable>().RemoveColliders)
             {
                 slice.GetComponent<Sliceable>().DisableColliders();
             }
@@ -229,7 +233,7 @@ public class Beam : MonoBehaviour
             {
                 slice.GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
                 slice.GetComponent<Sliceable>().DespawnSelf();
-            }
+            }  
         }
 
         // Calls any actions that happen when an object is sliced

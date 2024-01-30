@@ -174,7 +174,6 @@ public class Sliceable : MonoBehaviour
     {
         if (_removeColliders)
         {
-            //GetComponent<Collider>().enabled = false;
             Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), GetComponent<Collider>());
             
         }
