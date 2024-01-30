@@ -38,9 +38,9 @@ public class Beam : MonoBehaviour
     private Color _colour = Color.red;
 
     [SerializeField] PhysicMaterial _slipperyMat;
-/*    [SerializeField]
-    [Tooltip("The amount of force applied to each side of a slice")]
-    private float _forceAppliedToCut = 3f;*/
+    /*    [SerializeField]
+        [Tooltip("The amount of force applied to each side of a slice")]
+        private float _forceAppliedToCut = 3f;*/
 
     private Mesh _mesh;
     private Vector3[] _vertices;
@@ -52,7 +52,8 @@ public class Beam : MonoBehaviour
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
 
-    [SerializeField][Tooltip("Force applied when cut")]
+    [SerializeField]
+    [Tooltip("Force applied when cut")]
     private float _defaultForce;
 
     #region Getters/Setters
@@ -118,37 +119,37 @@ public class Beam : MonoBehaviour
         }
 
         //Draw first triangle vertices for back and front
-/*        _vertices[_frameCount] = _base.transform.position;
-        _vertices[_frameCount + 1] = _tip.transform.position;
-        _vertices[_frameCount + 2] = _previousTipPosition;
-        _vertices[_frameCount + 3] = _base.transform.position;
-        _vertices[_frameCount + 4] = _previousTipPosition;
-        _vertices[_frameCount + 5] = _tip.transform.position;
+        /*        _vertices[_frameCount] = _base.transform.position;
+                _vertices[_frameCount + 1] = _tip.transform.position;
+                _vertices[_frameCount + 2] = _previousTipPosition;
+                _vertices[_frameCount + 3] = _base.transform.position;
+                _vertices[_frameCount + 4] = _previousTipPosition;
+                _vertices[_frameCount + 5] = _tip.transform.position;
 
-        //Draw fill in triangle vertices
-        _vertices[_frameCount + 6] = _previousTipPosition;
-        _vertices[_frameCount + 7] = _base.transform.position;
-        _vertices[_frameCount + 8] = _previousBasePosition;
-        _vertices[_frameCount + 9] = _previousTipPosition;
-        _vertices[_frameCount + 10] = _previousBasePosition;
-        _vertices[_frameCount + 11] = _base.transform.position;
+                //Draw fill in triangle vertices
+                _vertices[_frameCount + 6] = _previousTipPosition;
+                _vertices[_frameCount + 7] = _base.transform.position;
+                _vertices[_frameCount + 8] = _previousBasePosition;
+                _vertices[_frameCount + 9] = _previousTipPosition;
+                _vertices[_frameCount + 10] = _previousBasePosition;
+                _vertices[_frameCount + 11] = _base.transform.position;
 
-        //Set triangles
-        _triangles[_frameCount] = _frameCount;
-        _triangles[_frameCount + 1] = _frameCount + 1;
-        _triangles[_frameCount + 2] = _frameCount + 2;
-        _triangles[_frameCount + 3] = _frameCount + 3;
-        _triangles[_frameCount + 4] = _frameCount + 4;
-        _triangles[_frameCount + 5] = _frameCount + 5;
-        _triangles[_frameCount + 6] = _frameCount + 6;
-        _triangles[_frameCount + 7] = _frameCount + 7;
-        _triangles[_frameCount + 8] = _frameCount + 8;
-        _triangles[_frameCount + 9] = _frameCount + 9;
-        _triangles[_frameCount + 10] = _frameCount + 10;
-        _triangles[_frameCount + 11] = _frameCount + 11;*/
+                //Set triangles
+                _triangles[_frameCount] = _frameCount;
+                _triangles[_frameCount + 1] = _frameCount + 1;
+                _triangles[_frameCount + 2] = _frameCount + 2;
+                _triangles[_frameCount + 3] = _frameCount + 3;
+                _triangles[_frameCount + 4] = _frameCount + 4;
+                _triangles[_frameCount + 5] = _frameCount + 5;
+                _triangles[_frameCount + 6] = _frameCount + 6;
+                _triangles[_frameCount + 7] = _frameCount + 7;
+                _triangles[_frameCount + 8] = _frameCount + 8;
+                _triangles[_frameCount + 9] = _frameCount + 9;
+                _triangles[_frameCount + 10] = _frameCount + 10;
+                _triangles[_frameCount + 11] = _frameCount + 11;*/
 
-       /* _meshParent.GetComponent<MeshFilter>().mesh.vertices = _vertices;
-        _meshParent.GetComponent<MeshFilter>().mesh.triangles = _triangles;*/
+        /* _meshParent.GetComponent<MeshFilter>().mesh.vertices = _vertices;
+         _meshParent.GetComponent<MeshFilter>().mesh.triangles = _triangles;*/
 
         //Track the previous base and tip positions for the next frame
         _previousTipPosition = _tip.transform.position;
@@ -178,13 +179,13 @@ public class Beam : MonoBehaviour
 
         //Transform the normal so that it is aligned with the object we are
         //slicing's transform.
-        Vector3 transformedNormal = 
-            ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose 
+        Vector3 transformedNormal =
+            ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose
             * normal)).normalized;
 
         //Get the enter position relative to the object we're cutting's local
         //transform
-        Vector3 transformedStartingPoint = 
+        Vector3 transformedStartingPoint =
             other.gameObject.transform.InverseTransformPoint(_triggerEnterTipPosition);
 
         Plane plane = new Plane();
@@ -258,6 +259,18 @@ public class Beam : MonoBehaviour
 
     private bool AbleToSlice()
     {
-        return (!Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 10f));
+        return true;
+        /*if(Physics.Raycast(GameObject.Find("Player").transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 10f))
+        {
+            Debug.Log(hit.transform.gameObject);
+            return (hit.transform.GetComponent<Sliceable>());
+        }
+        return false;*/
+    }
+
+    private void Update()
+    {
+        /*Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+        Debug.DrawRay(GameObject.Find("Base").transform.position, forward, Color.green);*/
     }
 }
