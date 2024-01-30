@@ -568,6 +568,9 @@ MonoBehaviour:
   _shareVertices: 0
   _smoothVertices: 0
   _forceApplied: 1
+  _despawn: 0
+  _despawnAfter: 0
+  _removeColliders: 0
 --- !u!64 &112455053
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1912,6 +1915,9 @@ MonoBehaviour:
   _shareVertices: 0
   _smoothVertices: 0
   _forceApplied: 6
+  _despawn: 0
+  _despawnAfter: 0
+  _removeColliders: 0
 --- !u!64 &243626992
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -42929,6 +42935,9 @@ MonoBehaviour:
   _shareVertices: 0
   _smoothVertices: 0
   _forceApplied: 1
+  _despawn: 0
+  _despawnAfter: 0
+  _removeColliders: 0
 --- !u!1 &618028390
 GameObject:
   m_ObjectHideFlags: 0
@@ -45264,7 +45273,7 @@ GameObject:
   - component: {fileID: 825220484}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48130,7 +48139,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32636
+  m_Name: pb_Mesh35798
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -53065,6 +53074,9 @@ MonoBehaviour:
   _shareVertices: 0
   _smoothVertices: 0
   _forceApplied: 4
+  _despawn: 1
+  _despawnAfter: 7
+  _removeColliders: 1
 --- !u!43 &1181103523
 Mesh:
   m_ObjectHideFlags: 0
@@ -54372,6 +54384,9 @@ MonoBehaviour:
   _shareVertices: 0
   _smoothVertices: 0
   _forceApplied: 4
+  _despawn: 0
+  _despawnAfter: 0
+  _removeColliders: 0
 --- !u!64 &1296164046
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -92715,6 +92730,9 @@ MonoBehaviour:
   _shareVertices: 0
   _smoothVertices: 0
   _forceApplied: 0
+  _despawn: 0
+  _despawnAfter: 0
+  _removeColliders: 0
 --- !u!114 &1571709553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96126,6 +96144,9 @@ MonoBehaviour:
   _shareVertices: 0
   _smoothVertices: 0
   _forceApplied: 4
+  _despawn: 0
+  _despawnAfter: 0
+  _removeColliders: 0
 --- !u!64 &1887420052
 MeshCollider:
   m_ObjectHideFlags: 0

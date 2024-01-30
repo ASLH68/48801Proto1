@@ -217,7 +217,19 @@ public class Beam : MonoBehaviour
             slice.GetComponent<Sliceable>().UseGravity = T.UseGravity;
             slice.GetComponent<Sliceable>().SmoothVertices = T.SmoothVertices;
             slice.GetComponent<Sliceable>().ShareVertices = T.ShareVertices;
-            slice.GetComponent<Sliceable>().ForceApplied = T.ForceApplied;
+            slice.GetComponent<Sliceable>().Despawn = T.Despawn;
+            slice.GetComponent<Sliceable>().RemoveColliders= T.RemoveColliders;
+
+            if(slice.GetComponent<Sliceable>().RemoveColliders)
+            {
+                slice.GetComponent<Sliceable>().DisableColliders();
+            }
+
+            if (slice.GetComponent<Sliceable>().Despawn)
+            {
+                slice.GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
+                slice.GetComponent<Sliceable>().DespawnSelf();
+            }
         }
 
         // Calls any actions that happen when an object is sliced
@@ -225,6 +237,7 @@ public class Beam : MonoBehaviour
         {
             Sliced.SlicedAction();
         }
+
         //other.GetComponent<Sliceable>().UseGravity = false;
 
         Destroy(other.gameObject);
