@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
     CinemachineVirtualCamera mainCamera;
-    GameObject laser;
+    [SerializeField] GameObject laser;
 
     Vector2 moveDirection;
     Vector3 velocity;
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
         rb = gameObject.GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<CinemachineVirtualCamera>();
-        laser = mainCamera.transform.GetChild(0).gameObject;
+        //laser = mainCamera.transform.GetChild(0).gameObject;
 
         playerControls = new PlayerControls();
         playerControls.BasicControls.Enable();
