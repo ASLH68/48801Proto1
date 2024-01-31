@@ -163,6 +163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   jumpForce: 0.25
+  cutCameraDamping: 0.05
+  cutCameraFOV: 53
   laser: {fileID: 0}
   groundMask:
     serializedVersion: 2
