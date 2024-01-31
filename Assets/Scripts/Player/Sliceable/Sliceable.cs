@@ -29,7 +29,15 @@ public class Sliceable : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Despawn when cut")]
-    private bool _despawn;
+    private bool _despawnEntireObj;
+
+    [SerializeField] 
+    [Tooltip("Despawn only top half")]
+    private bool _topHalfDespawn;
+    
+    [SerializeField]
+    [Tooltip("Despawn only bot half")] 
+    private bool _botHalfDespawn;
 
     [SerializeField]
     [Tooltip("Duration before despawning")]
@@ -38,7 +46,6 @@ public class Sliceable : MonoBehaviour
     [SerializeField]
     [Tooltip("Remove colliders when cut")]
     private bool _removeColliders;
-
 
     public bool IsSolid
     {
@@ -123,11 +130,11 @@ public class Sliceable : MonoBehaviour
     {
         get
         {
-            return _despawn;
+            return _despawnEntireObj;
         }
         set
         {
-            _despawn = value;
+            _despawnEntireObj = value;
         }
     }
 
@@ -155,13 +162,34 @@ public class Sliceable : MonoBehaviour
         }
     }
 
+    public bool TopHalfDespawn
+    {
+        get
+        {
+            return _topHalfDespawn;
+        }
+        set
+        {
+            _topHalfDespawn = value;
+        }
+    }
+
+    public bool BotHalfDespawn
+    {
+        get
+        {
+            return _botHalfDespawn;
+        }
+        set
+        {
+            _botHalfDespawn = value;
+        }
+    }
+
 
     public void DespawnSelf()
     {
-        if(_despawn)
-        {
-            StartCoroutine(DespawnOverTime());
-        }
+        StartCoroutine(DespawnOverTime());
     }
 
     private IEnumerator DespawnOverTime()

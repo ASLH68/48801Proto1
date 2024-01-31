@@ -217,25 +217,40 @@ public class Beam : MonoBehaviour
             GameObject[] slices = Slicer.Slice(plane, other.gameObject);
             foreach (GameObject slice in slices)
             {
+                Sliceable sliceable = slice.GetComponent<Sliceable>();
                 // sliced halves can be sliced again
-                slice.GetComponent<Sliceable>().UseGravity = T.UseGravity;
-                slice.GetComponent<Sliceable>().SmoothVertices = T.SmoothVertices;
-                slice.GetComponent<Sliceable>().ShareVertices = T.ShareVertices;
-                slice.GetComponent<Sliceable>().Despawn = T.Despawn;
-                slice.GetComponent<Sliceable>().RemoveColliders = T.RemoveColliders;
+                sliceable.UseGravity = T.UseGravity;
+                sliceable.SmoothVertices = T.SmoothVertices;
+                sliceable.ShareVertices = T.ShareVertices;
+                sliceable.Despawn = T.Despawn;
+                sliceable.RemoveColliders = T.RemoveColliders;
 
                 // Adds slippery mat
                 //slice.GetComponent<MeshCollider>().material = _slipperyMat;
 
-                if (slice.GetComponent<Sliceable>().RemoveColliders)
+                if (sliceable.RemoveColliders)
                 {
-                    slice.GetComponent<Sliceable>().DisableColliders();
+                    sliceable.DisableColliders();
                 }
 
-                if (slice.GetComponent<Sliceable>().Despawn)
+                Sliceable otherSliceable = other.GetComponent<Sliceable>();
+                if (otherSliceable.TopHalfDespawn && otherSliceable.GetComponent<Sliceable>().BotHalfDespawn || otherSliceable.GetComponent<Sliceable>().Despawn)
                 {
-                    slice.GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
-                    slice.GetComponent<Sliceable>().DespawnSelf();
+                    Debug.Log("test");
+                    sliceable.DespawnAfter = T.DespawnAfter;
+                    sliceable.DespawnSelf();
+                }
+                else if(otherSliceable.TopHalfDespawn)
+                {
+                    Debug.Log(slices[0].name);
+                    slices[0].GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
+                    slices[0].GetComponent<Sliceable>().DespawnSelf();
+                }
+                else if (otherSliceable.BotHalfDespawn)
+                {
+                    Debug.Log(slices[1].name);
+                    slices[1].GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
+                    slices[1].GetComponent<Sliceable>().DespawnSelf();
                 }
             }
 

@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     float defaultDamping;
     [SerializeField] float cutCameraFOV;
     float defaultFOV;
-  
+
     PlayerControls playerControls;
     InputAction move, slash, jump, reset, quit;
 
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveDirection;
     Vector3 velocity;
-    
+
     bool isGrounded = true;
     float groundDistance = 0.3f;
     [SerializeField] LayerMask groundMask;
@@ -56,10 +56,61 @@ public class PlayerController : MonoBehaviour
 
         slash.performed += ctx => laser.SetActive(true);
         slash.performed += ctx => transposer.m_XDamping = transposer.m_YDamping = transposer.m_ZDamping = cutCameraDamping;
-        slash.performed += ctx => mainCamera.m_Lens.FieldOfView = cutCameraFOV;
+        //slash.performed += ctx => cameraLens.FieldOfView = cutCameraFOV;
+        slash.performed += ctx => StartZoom(true);
+
         slash.canceled += ctx => laser.SetActive(false);
         slash.canceled += ctx => transposer.m_XDamping = transposer.m_YDamping = transposer.m_ZDamping = defaultDamping;
-        slash.canceled += ctx => mainCamera.m_Lens.FieldOfView = defaultFOV;
+        //slash.canceled += ctx => cameraLens.FieldOfView = defaultFOV;
+        slash.canceled += ctx => StartZoom(false);
+    }
+
+    private void StartZoom(bool zoomingIn)
+    {
+        StopAllCoroutines();
+
+        if (zoomingIn)
+            StartCoroutine(ZoomIn());
+        else
+            StartCoroutine(ZoomOut());
+    }
+
+    IEnumerator ZoomIn()
+    {
+        float interpolationVal = 0;
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            interpolationVal += 0.05f;
+
+            mainCamera.m_Lens.FieldOfView = Mathf.Lerp(defaultFOV, cutCameraFOV, interpolationVal);
+
+            if (interpolationVal >= 1f && mainCamera.m_Lens.FieldOfView >= defaultFOV)
+                break;
+        }
+
+        mainCamera.m_Lens.FieldOfView = defaultFOV;
+    }
+
+    IEnumerator ZoomOut()
+    {
+        float interpolationVal = 0;
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            interpolationVal += 0.05f;
+
+            mainCamera.m_Lens.FieldOfView = Mathf.Lerp(cutCameraFOV, defaultFOV, interpolationVal);
+
+            if (interpolationVal >= 1f && mainCamera.m_Lens.FieldOfView <= cutCameraFOV)
+                break;
+        }
+
+        mainCamera.m_Lens.FieldOfView = cutCameraFOV;
     }
 
     // Update is called once per frame
