@@ -519,14 +519,6 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 1435518836063171230, guid: c762b2d118abde84d8fdc2fc2089b2e3, type: 3}
-      propertyPath: cutCameraFOV
-      value: 53
-      objectReference: {fileID: 0}
-    - target: {fileID: 1435518836063171230, guid: c762b2d118abde84d8fdc2fc2089b2e3, type: 3}
-      propertyPath: cutCameraDamping
-      value: 0.08
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c762b2d118abde84d8fdc2fc2089b2e3, type: 3}
 --- !u!1 &1426264313
