@@ -52,6 +52,8 @@ public class Beam : MonoBehaviour
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
 
+    private bool _ableToSliceObj;
+
     [SerializeField]
     [Tooltip("Force applied when cut")]
     private float _defaultForce;
@@ -212,65 +214,62 @@ public class Beam : MonoBehaviour
             force = DefaultForce;
         }
 
-        if (AbleToSlice())
+        GameObject[] slices = Slicer.Slice(plane, other.gameObject);
+        foreach (GameObject slice in slices)
         {
-            GameObject[] slices = Slicer.Slice(plane, other.gameObject);
-            foreach (GameObject slice in slices)
+            // sliced halves can be sliced again
+            slice.GetComponent<Sliceable>().UseGravity = T.UseGravity;
+            slice.GetComponent<Sliceable>().SmoothVertices = T.SmoothVertices;
+            slice.GetComponent<Sliceable>().ShareVertices = T.ShareVertices;
+            slice.GetComponent<Sliceable>().Despawn = T.Despawn;
+            slice.GetComponent<Sliceable>().RemoveColliders = T.RemoveColliders;
+
+            // Adds slippery mat
+            //slice.GetComponent<MeshCollider>().material = _slipperyMat;
+
+            if (slice.GetComponent<Sliceable>().RemoveColliders)
             {
-                // sliced halves can be sliced again
-                slice.GetComponent<Sliceable>().UseGravity = T.UseGravity;
-                slice.GetComponent<Sliceable>().SmoothVertices = T.SmoothVertices;
-                slice.GetComponent<Sliceable>().ShareVertices = T.ShareVertices;
-                slice.GetComponent<Sliceable>().Despawn = T.Despawn;
-                slice.GetComponent<Sliceable>().RemoveColliders = T.RemoveColliders;
-
-                // Adds slippery mat
-                //slice.GetComponent<MeshCollider>().material = _slipperyMat;
-
-                if (slice.GetComponent<Sliceable>().RemoveColliders)
-                {
-                    slice.GetComponent<Sliceable>().DisableColliders();
-                }
-
-                if (slice.GetComponent<Sliceable>().Despawn)
-                {
-                    slice.GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
-                    slice.GetComponent<Sliceable>().DespawnSelf();
-                }
+                slice.GetComponent<Sliceable>().DisableColliders();
             }
 
-            // Calls any actions that happen when an object is sliced
-            if (other.TryGetComponent<OnSliced>(out OnSliced Sliced))
+            if (slice.GetComponent<Sliceable>().Despawn)
             {
-                Sliced.SlicedAction();
+                slice.GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
+                slice.GetComponent<Sliceable>().DespawnSelf();
             }
-
-            //other.GetComponent<Sliceable>().UseGravity = false;
-
-            Destroy(other.gameObject);
-
-            Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
-            Vector3 newNormal = transformedNormal + Vector3.up *
-                force;
-
-            rigidbody.AddForce(newNormal, ForceMode.Impulse);
         }
-    }
 
-    private bool AbleToSlice()
-    {
-        return true;
-        /*if(Physics.Raycast(GameObject.Find("Player").transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 10f))
+        // Calls any actions that happen when an object is sliced
+        if (other.TryGetComponent<OnSliced>(out OnSliced Sliced))
         {
-            Debug.Log(hit.transform.gameObject);
-            return (hit.transform.GetComponent<Sliceable>());
+            Sliced.SlicedAction();
         }
-        return false;*/
+
+        //other.GetComponent<Sliceable>().UseGravity = false;
+
+        Destroy(other.gameObject);
+
+        Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
+        Vector3 newNormal = transformedNormal + Vector3.up *
+            force;
+
+        rigidbody.AddForce(newNormal, ForceMode.Impulse);
     }
 
     private void Update()
     {
-        /*Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        Debug.DrawRay(GameObject.Find("Base").transform.position, forward, Color.green);*/
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 4.75f;
+
+        if (Physics.Raycast(GameObject.Find("Base").transform.position, forward, out RaycastHit hit, 4.75f))
+        {
+            //Debug.Log(hit.transform.gameObject);
+            GameObject tip = GameObject.Find("Tip");
+            Transform ogParent = tip.transform.parent;
+            tip.transform.parent = null;
+            tip.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+            tip.transform.parent = ogParent;
+            //return (hit.transform.TryGetComponent<Sliceable>(out Sliceable P));
+        }
+        //return false;
     }
 }
