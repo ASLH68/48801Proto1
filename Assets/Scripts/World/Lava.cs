@@ -1,45 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //Video used as reference: https://www.youtube.com/watch?v=hH0OYz7YtKk
 
 public class Lava : MonoBehaviour
 {
-    [SerializeField] private Transform[] _waypoints;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _checkDistance = 0.05f;
+    [SerializeField] private Transform[] waypoints;
+    [SerializeField] private float defaultSpeed;
+    [SerializeField] private float checkDistance = 0.05f;
 
-    private Transform _targetWaypoint;
-    private int _currentWaypointIndex = 0;
+    [SerializeField] private Transform targetWaypoint;
+    [SerializeField] private int currentWaypointIndex = 0;
+
+    public float distanceFromLava;
+
+    public GameObject playerReference;
 
     void Start()
     {
-        _targetWaypoint = _waypoints[0];
+        targetWaypoint = waypoints[0];
     }
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            _targetWaypoint.position,
-            _speed * Time.deltaTime
-            );
+        transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, defaultSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, _targetWaypoint.position) < _checkDistance )
+        if (Vector3.Distance(transform.position, targetWaypoint.position) < checkDistance )
         {
-            _targetWaypoint = GetNextWaypoint();
+            targetWaypoint = GetNextWaypoint();
+        }
+
+        //how far the player is from the lava
+        //Debug.Log("distance from death " + (playerReference.transform.position.y - transform.position.y - 0.75f).ToString("F2"));
+        distanceFromLava = Mathf.Round((playerReference.transform.position.y - transform.position.y - 0.75f) * 100f) / 100f;
+
+        //Debug.Log("lava pos y" + transform.position.y);
+        //Debug.Log(playerReference.transform.position.y);
+
+        if (transform.position.y > playerReference.transform.position.y - 0.75f)
+        {
+            //Debug.Log("dead, dead as hell");
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
     private Transform GetNextWaypoint() 
-    { 
-        _currentWaypointIndex++;
-        if (_currentWaypointIndex >= _waypoints.Length) 
+    {
+        //Debug.Log(waypoints.Length);
+        if (currentWaypointIndex >= waypoints.Length)
         {
-            _currentWaypointIndex = 0;
+            //Debug.Log("lava is at max height");
+            return waypoints[waypoints.Length - 1];
         }
-
-        return _waypoints[_currentWaypointIndex];
+        else if(currentWaypointIndex < waypoints.Length - 1)
+        {
+            currentWaypointIndex++;
+        }
+        //Debug.Log(currentWaypointIndex);
+        return waypoints[currentWaypointIndex];
     }
 }
