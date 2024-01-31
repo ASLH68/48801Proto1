@@ -742,6 +742,8 @@ MonoBehaviour:
   _botHalfDespawn: 0
   _despawnAfter: 0
   _removeColliders: 0
+  _topHalfLock: 0
+  _botHalfLock: 0
 --- !u!64 &112455053
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2091,6 +2093,8 @@ MonoBehaviour:
   _botHalfDespawn: 0
   _despawnAfter: 0
   _removeColliders: 0
+  _topHalfLock: 0
+  _botHalfLock: 0
 --- !u!64 &243626992
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -43136,6 +43140,8 @@ MonoBehaviour:
   _botHalfDespawn: 0
   _despawnAfter: 0
   _removeColliders: 0
+  _topHalfLock: 0
+  _botHalfLock: 0
 --- !u!1 &618028390
 GameObject:
   m_ObjectHideFlags: 0
@@ -53139,10 +53145,12 @@ MonoBehaviour:
   _smoothVertices: 0
   _forceApplied: 7
   _despawnEntireObj: 0
-  _topHalfDespawn: 1
+  _topHalfDespawn: 0
   _botHalfDespawn: 0
   _despawnAfter: 1
   _removeColliders: 1
+  _topHalfLock: 1
+  _botHalfLock: 0
 --- !u!43 &1181103523
 Mesh:
   m_ObjectHideFlags: 0
@@ -54366,6 +54374,8 @@ MonoBehaviour:
   _botHalfDespawn: 0
   _despawnAfter: 0
   _removeColliders: 0
+  _topHalfLock: 0
+  _botHalfLock: 0
 --- !u!64 &1296164046
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -92775,6 +92785,8 @@ MonoBehaviour:
   _botHalfDespawn: 0
   _despawnAfter: 0
   _removeColliders: 0
+  _topHalfLock: 0
+  _botHalfLock: 0
 --- !u!114 &1571709553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96099,6 +96111,8 @@ MonoBehaviour:
   _botHalfDespawn: 0
   _despawnAfter: 0
   _removeColliders: 0
+  _topHalfLock: 0
+  _botHalfLock: 0
 --- !u!64 &1887420052
 MeshCollider:
   m_ObjectHideFlags: 0

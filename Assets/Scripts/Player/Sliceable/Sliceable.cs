@@ -47,6 +47,15 @@ public class Sliceable : MonoBehaviour
     [Tooltip("Remove colliders when cut")]
     private bool _removeColliders;
 
+    [Header("Movement Locking")]
+    [SerializeField]
+    [Tooltip("Lock movement of top half")]
+    private bool _topHalfLock;
+
+    [SerializeField]
+    [Tooltip("Lock movement of bot half")]
+    private bool _botHalfLock;
+
     public bool IsSolid
     {
         get
@@ -183,6 +192,30 @@ public class Sliceable : MonoBehaviour
         set
         {
             _botHalfDespawn = value;
+        }
+    }
+
+    public bool TopHalfLock
+    {
+        get
+        {
+            return _topHalfLock;
+        }
+        set
+        {
+            _topHalfLock = value;
+        }
+    }
+
+    public bool BotHalfLock
+    {
+        get
+        {
+            return _botHalfLock;
+        }
+        set
+        {
+            _botHalfLock = value;
         }
     }
 

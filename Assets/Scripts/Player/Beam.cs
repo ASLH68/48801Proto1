@@ -252,6 +252,15 @@ public class Beam : MonoBehaviour
                     slices[1].GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
                     slices[1].GetComponent<Sliceable>().DespawnSelf();
                 }
+
+                if(otherSliceable.TopHalfLock)
+                {
+                    slices[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                }
+                if(otherSliceable.BotHalfLock)
+                {
+                    slices[1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                }
             }
 
             // Calls any actions that happen when an object is sliced
