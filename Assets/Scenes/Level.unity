@@ -524,7 +524,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh86640
+  m_Name: pb_Mesh29078
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -53149,7 +53149,7 @@ MonoBehaviour:
   _botHalfDespawn: 0
   _despawnAfter: 1
   _removeColliders: 1
-  _topHalfLock: 1
+  _topHalfLock: 0
   _botHalfLock: 0
 --- !u!43 &1181103523
 Mesh:
