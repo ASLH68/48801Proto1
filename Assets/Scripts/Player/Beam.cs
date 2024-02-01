@@ -52,6 +52,8 @@ public class Beam : MonoBehaviour
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
 
+    private bool _ableToSliceObj;
+
     [SerializeField]
     [Tooltip("Force applied when cut")]
     private float _defaultForce;
@@ -212,7 +214,7 @@ public class Beam : MonoBehaviour
             force = DefaultForce;
         }
 
-        if (AbleToSlice())
+        if (_ableToSliceObj)
         {
             GameObject[] slices = Slicer.Slice(plane, other.gameObject);
             foreach (GameObject slice in slices)
@@ -281,20 +283,25 @@ public class Beam : MonoBehaviour
         }
     }
 
-    private bool AbleToSlice()
-    {
-        return true;
-        /*if(Physics.Raycast(GameObject.Find("Player").transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 10f))
-        {
-            Debug.Log(hit.transform.gameObject);
-            return (hit.transform.GetComponent<Sliceable>());
-        }
-        return false;*/
-    }
-
     private void Update()
     {
-        /*Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        Debug.DrawRay(GameObject.Find("Base").transform.position, forward, Color.green);*/
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 4.75f;
+
+        if (Physics.Raycast(GameObject.Find("Base").transform.position, forward, out RaycastHit hit, 4.75f))
+        {
+            //Debug.Log(hit.transform.gameObject);
+            GameObject tip = GameObject.Find("Tip");
+            Transform ogParent = tip.transform.parent;
+            tip.transform.parent = null;
+            tip.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+            tip.transform.parent = ogParent;
+            
+            if(hit.transform.GetComponent<Sliceable>() != null)
+            {
+                _ableToSliceObj = true;
+            }
+            //return (hit.transform.TryGetComponent<Sliceable>(out Sliceable P));
+        }
+        //return false;
     }
 }
