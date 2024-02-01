@@ -214,46 +214,49 @@ public class Beam : MonoBehaviour
             force = DefaultForce;
         }
 
-        GameObject[] slices = Slicer.Slice(plane, other.gameObject);
-        foreach (GameObject slice in slices)
+        if (_ableToSliceObj)
         {
-            // sliced halves can be sliced again
-            slice.GetComponent<Sliceable>().UseGravity = T.UseGravity;
-            slice.GetComponent<Sliceable>().SmoothVertices = T.SmoothVertices;
-            slice.GetComponent<Sliceable>().ShareVertices = T.ShareVertices;
-            slice.GetComponent<Sliceable>().Despawn = T.Despawn;
-            slice.GetComponent<Sliceable>().RemoveColliders = T.RemoveColliders;
-
-            // Adds slippery mat
-            //slice.GetComponent<MeshCollider>().material = _slipperyMat;
-
-            if (slice.GetComponent<Sliceable>().RemoveColliders)
+            GameObject[] slices = Slicer.Slice(plane, other.gameObject);
+            foreach (GameObject slice in slices)
             {
-                slice.GetComponent<Sliceable>().DisableColliders();
+                // sliced halves can be sliced again
+                slice.GetComponent<Sliceable>().UseGravity = T.UseGravity;
+                slice.GetComponent<Sliceable>().SmoothVertices = T.SmoothVertices;
+                slice.GetComponent<Sliceable>().ShareVertices = T.ShareVertices;
+                slice.GetComponent<Sliceable>().Despawn = T.Despawn;
+                slice.GetComponent<Sliceable>().RemoveColliders = T.RemoveColliders;
+
+                // Adds slippery mat
+                //slice.GetComponent<MeshCollider>().material = _slipperyMat;
+
+                if (slice.GetComponent<Sliceable>().RemoveColliders)
+                {
+                    slice.GetComponent<Sliceable>().DisableColliders();
+                }
+
+                if (slice.GetComponent<Sliceable>().Despawn)
+                {
+                    slice.GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
+                    slice.GetComponent<Sliceable>().DespawnSelf();
+                }
             }
 
-            if (slice.GetComponent<Sliceable>().Despawn)
+            // Calls any actions that happen when an object is sliced
+            if (other.TryGetComponent<OnSliced>(out OnSliced Sliced))
             {
-                slice.GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
-                slice.GetComponent<Sliceable>().DespawnSelf();
+                Sliced.SlicedAction();
             }
+
+            //other.GetComponent<Sliceable>().UseGravity = false;
+
+            Destroy(other.gameObject);
+
+            Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
+            Vector3 newNormal = transformedNormal + Vector3.up *
+                force;
+
+            rigidbody.AddForce(newNormal, ForceMode.Impulse);
         }
-
-        // Calls any actions that happen when an object is sliced
-        if (other.TryGetComponent<OnSliced>(out OnSliced Sliced))
-        {
-            Sliced.SlicedAction();
-        }
-
-        //other.GetComponent<Sliceable>().UseGravity = false;
-
-        Destroy(other.gameObject);
-
-        Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
-        Vector3 newNormal = transformedNormal + Vector3.up *
-            force;
-
-        rigidbody.AddForce(newNormal, ForceMode.Impulse);
     }
 
     private void Update()
@@ -268,6 +271,11 @@ public class Beam : MonoBehaviour
             tip.transform.parent = null;
             tip.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
             tip.transform.parent = ogParent;
+            
+            if(hit.transform.GetComponent<Sliceable>() != null)
+            {
+                _ableToSliceObj = true;
+            }
             //return (hit.transform.TryGetComponent<Sliceable>(out Sliceable P));
         }
         //return false;
