@@ -8,18 +8,24 @@ using Cinemachine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
-    [SerializeField] float jumpHeight;
-  
+    [SerializeField] float jumpForce;
+
+    [SerializeField] float cutCameraDamping;
+    float defaultDamping;
+    [SerializeField] float cutCameraFOV;
+    float defaultFOV;
+
     PlayerControls playerControls;
     InputAction move, slash, jump, reset, quit;
 
     Rigidbody rb;
-    [SerializeField] CinemachineVirtualCamera mainCamera;
+    CinemachineVirtualCamera mainCamera;
+    CinemachineTransposer transposer;
     [SerializeField] GameObject laser;
 
     Vector2 moveDirection;
     Vector3 velocity;
-    
+
     bool isGrounded = true;
     float groundDistance = 0.3f;
     [SerializeField] LayerMask groundMask;
@@ -30,6 +36,11 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         rb = gameObject.GetComponent<Rigidbody>();
+        mainCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        transposer = mainCamera.GetCinemachineComponent<CinemachineTransposer>();
+        defaultDamping = transposer.m_XDamping;
+        defaultFOV = mainCamera.m_Lens.FieldOfView;
+        //laser = mainCamera.transform.GetChild(0).gameObject;
 
         playerControls = new PlayerControls();
         playerControls.BasicControls.Enable();
@@ -44,7 +55,62 @@ public class PlayerController : MonoBehaviour
         move.canceled += ctx => moveDirection = move.ReadValue<Vector2>();
 
         slash.performed += ctx => laser.SetActive(true);
+        slash.performed += ctx => transposer.m_XDamping = transposer.m_YDamping = transposer.m_ZDamping = cutCameraDamping;
+        //slash.performed += ctx => cameraLens.FieldOfView = cutCameraFOV;
+        slash.performed += ctx => StartZoom(true);
+
         slash.canceled += ctx => laser.SetActive(false);
+        slash.canceled += ctx => transposer.m_XDamping = transposer.m_YDamping = transposer.m_ZDamping = defaultDamping;
+        //slash.canceled += ctx => cameraLens.FieldOfView = defaultFOV;
+        slash.canceled += ctx => StartZoom(false);
+    }
+
+    private void StartZoom(bool zoomingIn)
+    {
+        StopAllCoroutines();
+
+        if (zoomingIn)
+            StartCoroutine(ZoomIn());
+        else
+            StartCoroutine(ZoomOut());
+    }
+
+    IEnumerator ZoomIn()
+    {
+        float interpolationVal = 0;
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            interpolationVal += 0.05f;
+
+            mainCamera.m_Lens.FieldOfView = Mathf.Lerp(defaultFOV, cutCameraFOV, interpolationVal);
+
+            if (interpolationVal >= 1f && mainCamera.m_Lens.FieldOfView >= defaultFOV)
+                break;
+        }
+
+        mainCamera.m_Lens.FieldOfView = defaultFOV;
+    }
+
+    IEnumerator ZoomOut()
+    {
+        float interpolationVal = 0;
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            interpolationVal += 0.05f;
+
+            mainCamera.m_Lens.FieldOfView = Mathf.Lerp(cutCameraFOV, defaultFOV, interpolationVal);
+
+            if (interpolationVal >= 1f && mainCamera.m_Lens.FieldOfView <= cutCameraFOV)
+                break;
+        }
+
+        mainCamera.m_Lens.FieldOfView = cutCameraFOV;
     }
 
     // Update is called once per frame
@@ -53,14 +119,14 @@ public class PlayerController : MonoBehaviour
         // Player Movement
         velocity = transform.right * moveDirection.x + transform.forward * moveDirection.y;
         velocity = velocity.normalized;
-        rb.AddForce(velocity * moveSpeed, ForceMode.Acceleration);
+        rb.AddForce(velocity * moveSpeed);
 
         float speed = rb.velocity.magnitude;
         if (speed > 5)
         {
             float brakeSpeed = speed - 5;
             Vector3 brakingVelocity = rb.velocity.normalized * brakeSpeed;
-            rb.AddForce(-brakingVelocity, ForceMode.Acceleration);
+            rb.AddForce(-brakingVelocity);
         }
 
         // Ground Check
@@ -71,13 +137,13 @@ public class PlayerController : MonoBehaviour
         if (jump.IsPressed() && isGrounded)
         {
             isGrounded = false;
-            float verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
-            rb.AddForce(new Vector3(0, verticalVelocity, 0), ForceMode.Impulse);
+            //float verticalVelocity = Mathf.Sqrt(jumpHeight *  Physics.gravity.y);
+            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
         if (reset.IsPressed())
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         if (quit.IsPressed())
         {

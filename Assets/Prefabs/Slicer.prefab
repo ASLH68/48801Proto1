@@ -128,7 +128,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a8fac1e1217781041870f9fc24432984, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -193,4 +193,4 @@ MonoBehaviour:
   _meshParent: {fileID: 9089760198451903638}
   _trailFrameLength: 3
   _colour: {r: 1, g: 0, b: 0, a: 1}
-  _forceAppliedToCut: 3
+  _defaultForce: 0
