@@ -161,7 +161,7 @@ public class Beam : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("enter");
+        //Debug.Log("enter");
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
     }
@@ -240,6 +240,10 @@ public class Beam : MonoBehaviour
                 {
                     sliceable.DisableColliders();
                 }
+
+                sliceable.gameObject.layer = LayerMask.NameToLayer("Ground");
+                //slices[0].layer = LayerMask.NameToLayer("Ground");
+                //slices[1].layer = LayerMask.NameToLayer("Ground");
 
                 Sliceable otherSliceable = other.GetComponent<Sliceable>();
                 if (otherSliceable.TopHalfDespawn && otherSliceable.GetComponent<Sliceable>().BotHalfDespawn || otherSliceable.GetComponent<Sliceable>().Despawn)
