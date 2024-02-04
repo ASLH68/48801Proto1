@@ -52,6 +52,9 @@ public class Beam : MonoBehaviour
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
 
+    private Color _cuttingColor = Color.red;
+    private Color _cutColor = Color.green;
+
     private bool _ableToSliceObj;
 
     [SerializeField]
@@ -162,6 +165,11 @@ public class Beam : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("enter");
+        if (other.GetComponent<Sliceable>() != null)
+        {
+            other.GetComponent<Renderer>().material.color = _cuttingColor;
+        }
+
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
     }
@@ -232,6 +240,8 @@ public class Beam : MonoBehaviour
                 sliceable.TopHalfDespawn = T.TopHalfDespawn;
                 sliceable.TopHalfRotation = T.TopHalfRotation;
                 sliceable.BotHalfRotation = T.BotHalfRotation;
+
+                slice.GetComponent<Renderer>().material.color = _cutColor;
 
                 // Adds slippery mat
                 //slice.GetComponent<MeshCollider>().material = _slipperyMat;
