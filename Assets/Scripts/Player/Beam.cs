@@ -314,9 +314,9 @@ public class Beam : MonoBehaviour
 
     private void Update()
     {
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 4.75f;
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 50f;
 
-        if (Physics.Raycast(GameObject.Find("Base").transform.position, forward, out RaycastHit hit, 4.75f))
+        if (Physics.Raycast(GameObject.Find("Base").transform.position, forward, out RaycastHit hit, 50f))
         {
             //Debug.Log(hit.transform.gameObject);
             GameObject tip = GameObject.Find("Tip");
@@ -324,7 +324,8 @@ public class Beam : MonoBehaviour
             tip.transform.parent = null;
             tip.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
             tip.transform.parent = ogParent;
-            
+
+            GameObject.Find("LaserHolder").transform.localScale = new Vector3(1.141214f, 1.141214f, hit.distance + 2f);
             if(hit.transform.GetComponent<Sliceable>() != null)
             {
                 _ableToSliceObj = true;
