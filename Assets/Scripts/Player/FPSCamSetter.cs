@@ -1,3 +1,11 @@
+/*****************************************************************************
+// File Name :         FPSCamSetter.cs
+// Author :            Nick Grinsteasd
+// Creation Date :     
+//
+// Brief Description : Sets the follow and look at variables on the Cinemachine
+                       camera so we don't have to set them in scene.
+*****************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -52,6 +52,11 @@ public class Beam : MonoBehaviour
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
 
+    private Color _cuttingColor = Color.red;
+    private Color _cutColor = Color.green;
+
+    private bool _ableToSliceObj;
+
     [SerializeField]
     [Tooltip("Force applied when cut")]
     private float _defaultForce;
@@ -159,7 +164,12 @@ public class Beam : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("enter");
+        //Debug.Log("enter");
+        if (other.GetComponent<Sliceable>() != null)
+        {
+            other.GetComponent<Renderer>().material.color = _cuttingColor;
+        }
+
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
     }
@@ -212,7 +222,7 @@ public class Beam : MonoBehaviour
             force = DefaultForce;
         }
 
-        if (AbleToSlice())
+        if (_ableToSliceObj)
         {
             GameObject[] slices = Slicer.Slice(plane, other.gameObject);
             foreach (GameObject slice in slices)
@@ -224,6 +234,14 @@ public class Beam : MonoBehaviour
                 sliceable.ShareVertices = T.ShareVertices;
                 sliceable.Despawn = T.Despawn;
                 sliceable.RemoveColliders = T.RemoveColliders;
+                sliceable.TopHalfLock = T.TopHalfLock;
+                sliceable.BotHalfLock = T.BotHalfLock;
+                sliceable.BotHalfDespawn = T.BotHalfDespawn;
+                sliceable.TopHalfDespawn = T.TopHalfDespawn;
+                sliceable.TopHalfRotation = T.TopHalfRotation;
+                sliceable.BotHalfRotation = T.BotHalfRotation;
+
+                slice.GetComponent<Renderer>().material.color = _cutColor;
 
                 // Adds slippery mat
                 //slice.GetComponent<MeshCollider>().material = _slipperyMat;
@@ -233,6 +251,10 @@ public class Beam : MonoBehaviour
                     sliceable.DisableColliders();
                 }
 
+                sliceable.gameObject.layer = LayerMask.NameToLayer("Ground");
+                //slices[0].layer = LayerMask.NameToLayer("Ground");
+                //slices[1].layer = LayerMask.NameToLayer("Ground");
+
                 Sliceable otherSliceable = other.GetComponent<Sliceable>();
                 if (otherSliceable.TopHalfDespawn && otherSliceable.GetComponent<Sliceable>().BotHalfDespawn || otherSliceable.GetComponent<Sliceable>().Despawn)
                 {
@@ -240,7 +262,7 @@ public class Beam : MonoBehaviour
                     sliceable.DespawnAfter = T.DespawnAfter;
                     sliceable.DespawnSelf();
                 }
-                else if(otherSliceable.TopHalfDespawn)
+                else if (otherSliceable.TopHalfDespawn)
                 {
                     Debug.Log(slices[0].name);
                     slices[0].GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
@@ -251,6 +273,24 @@ public class Beam : MonoBehaviour
                     Debug.Log(slices[1].name);
                     slices[1].GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
                     slices[1].GetComponent<Sliceable>().DespawnSelf();
+                }
+
+                if (otherSliceable.TopHalfLock)
+                {
+                    slices[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                }
+                if (otherSliceable.BotHalfLock)
+                {
+                    slices[1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                }
+
+                if (otherSliceable.TopHalfRotation)
+                {
+                    slices[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                }
+                if (otherSliceable.BotHalfRotation)
+                {
+                    slices[1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 }
             }
 
@@ -272,20 +312,25 @@ public class Beam : MonoBehaviour
         }
     }
 
-    private bool AbleToSlice()
-    {
-        return true;
-        /*if(Physics.Raycast(GameObject.Find("Player").transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, 10f))
-        {
-            Debug.Log(hit.transform.gameObject);
-            return (hit.transform.GetComponent<Sliceable>());
-        }
-        return false;*/
-    }
-
     private void Update()
     {
-        /*Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        Debug.DrawRay(GameObject.Find("Base").transform.position, forward, Color.green);*/
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * 4.75f;
+
+        if (Physics.Raycast(GameObject.Find("Base").transform.position, forward, out RaycastHit hit, 4.75f))
+        {
+            //Debug.Log(hit.transform.gameObject);
+            GameObject tip = GameObject.Find("Tip");
+            Transform ogParent = tip.transform.parent;
+            tip.transform.parent = null;
+            tip.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+            tip.transform.parent = ogParent;
+            
+            if(hit.transform.GetComponent<Sliceable>() != null)
+            {
+                _ableToSliceObj = true;
+            }
+            //return (hit.transform.TryGetComponent<Sliceable>(out Sliceable P));
+        }
+        //return false;
     }
 }
