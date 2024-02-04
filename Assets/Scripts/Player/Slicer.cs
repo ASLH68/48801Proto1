@@ -15,6 +15,23 @@ using UnityEngine.Rendering;
 
 public class Slicer : MonoBehaviour
 {
+    public static Slicer Instance;
+    public GameObject PositiveObj { get; private set; }
+    public GameObject NegativeObj { get; private set; }
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+
     /// <summary>
     /// Slice the object by the plane 
     /// </summary>
@@ -41,24 +58,28 @@ public class Slicer : MonoBehaviour
             sliceable.ReverseWireTriangles, sliceable.ShareVertices, 
             sliceable.SmoothVertices);
 
-        GameObject positiveObject = CreateMeshGameObject(objectToCut);
-        positiveObject.name = string.Format("{0}_positive", objectToCut.name);
+        GameObject PositiveObj = CreateMeshGameObject(objectToCut);
+        PositiveObj.name = string.Format("{0}_positive", objectToCut.name);
 
-        GameObject negativeObject = CreateMeshGameObject(objectToCut);
-        negativeObject.name = string.Format("{0}_negative", objectToCut.name);
+        PositiveObj.transform.parent = objectToCut.transform.parent;
+       
+        GameObject NegativeObj = CreateMeshGameObject(objectToCut);
+        NegativeObj.name = string.Format("{0}_negative", objectToCut.name);
+
+        NegativeObj.transform.parent = objectToCut.transform.parent;
 
         var positiveSideMeshData = slicesMeta.PositiveSideMesh;
         var negativeSideMeshData = slicesMeta.NegativeSideMesh;
 
-        positiveObject.GetComponent<MeshFilter>().mesh = positiveSideMeshData;
-        negativeObject.GetComponent<MeshFilter>().mesh = negativeSideMeshData;
+        PositiveObj.GetComponent<MeshFilter>().mesh = positiveSideMeshData;
+        NegativeObj.GetComponent<MeshFilter>().mesh = negativeSideMeshData;
 
-        SetupCollidersAndRigidBodys(ref positiveObject, positiveSideMeshData, 
+        SetupCollidersAndRigidBodys(ref PositiveObj, positiveSideMeshData, 
             sliceable.UseGravity);
-        SetupCollidersAndRigidBodys(ref negativeObject, negativeSideMeshData, 
+        SetupCollidersAndRigidBodys(ref NegativeObj, negativeSideMeshData, 
             sliceable.UseGravity);
 
-        return new GameObject[] { positiveObject, negativeObject };
+        return new GameObject[] { PositiveObj, NegativeObj };
     }
 
     /// <summary>

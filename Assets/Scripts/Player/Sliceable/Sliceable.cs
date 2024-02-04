@@ -29,7 +29,15 @@ public class Sliceable : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Despawn when cut")]
-    private bool _despawn;
+    private bool _despawnEntireObj;
+
+    [SerializeField] 
+    [Tooltip("Despawn only top half")]
+    private bool _topHalfDespawn;
+    
+    [SerializeField]
+    [Tooltip("Despawn only bot half")] 
+    private bool _botHalfDespawn;
 
     [SerializeField]
     [Tooltip("Duration before despawning")]
@@ -39,6 +47,23 @@ public class Sliceable : MonoBehaviour
     [Tooltip("Remove colliders when cut")]
     private bool _removeColliders;
 
+    [Header("Movement Locking")]
+    [SerializeField]
+    [Tooltip("Lock movement of top half")]
+    private bool _topHalfLock;
+
+    [SerializeField]
+    [Tooltip("Lock movement of bot half")]
+    private bool _botHalfLock;
+
+    [Header("Rotation Locking")]
+    [SerializeField]
+    [Tooltip("Lock rotation of top half")]
+    private bool _topHalfRotation;
+
+    [SerializeField]
+    [Tooltip("Lock rotation of bot half")]
+    private bool _botHalfRotation;
 
     public bool IsSolid
     {
@@ -123,11 +148,11 @@ public class Sliceable : MonoBehaviour
     {
         get
         {
-            return _despawn;
+            return _despawnEntireObj;
         }
         set
         {
-            _despawn = value;
+            _despawnEntireObj = value;
         }
     }
 
@@ -155,13 +180,82 @@ public class Sliceable : MonoBehaviour
         }
     }
 
+    public bool TopHalfDespawn
+    {
+        get
+        {
+            return _topHalfDespawn;
+        }
+        set
+        {
+            _topHalfDespawn = value;
+        }
+    }
+
+    public bool BotHalfDespawn
+    {
+        get
+        {
+            return _botHalfDespawn;
+        }
+        set
+        {
+            _botHalfDespawn = value;
+        }
+    }
+
+    public bool TopHalfLock
+    {
+        get
+        {
+            return _topHalfLock;
+        }
+        set
+        {
+            _topHalfLock = value;
+        }
+    }
+
+    public bool BotHalfLock
+    {
+        get
+        {
+            return _botHalfLock;
+        }
+        set
+        {
+            _botHalfLock = value;
+        }
+    }
+
+    public bool TopHalfRotation
+    {
+        get
+        {
+            return _topHalfRotation;
+        }
+        set
+        {
+            _topHalfRotation = value;
+        }
+    }
+
+    public bool BotHalfRotation
+    {
+        get
+        {
+            return _botHalfRotation;
+        }
+        set
+        {
+            _botHalfRotation = value;
+        }
+    }
+
 
     public void DespawnSelf()
     {
-        if(_despawn)
-        {
-            StartCoroutine(DespawnOverTime());
-        }
+        StartCoroutine(DespawnOverTime());
     }
 
     private IEnumerator DespawnOverTime()
