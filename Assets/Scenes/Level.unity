@@ -524,7 +524,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29078
+  m_Name: pb_Mesh29076
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -744,6 +744,8 @@ MonoBehaviour:
   _removeColliders: 0
   _topHalfLock: 0
   _botHalfLock: 0
+  _topHalfRotation: 0
+  _botHalfRotation: 0
 --- !u!64 &112455053
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2095,6 +2097,8 @@ MonoBehaviour:
   _removeColliders: 0
   _topHalfLock: 0
   _botHalfLock: 0
+  _topHalfRotation: 0
+  _botHalfRotation: 0
 --- !u!64 &243626992
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -43142,6 +43146,8 @@ MonoBehaviour:
   _removeColliders: 0
   _topHalfLock: 0
   _botHalfLock: 0
+  _topHalfRotation: 0
+  _botHalfRotation: 0
 --- !u!1 &618028390
 GameObject:
   m_ObjectHideFlags: 0
@@ -51784,7 +51790,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh86194
+  m_Name: pb_Mesh28628
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -53151,6 +53157,8 @@ MonoBehaviour:
   _removeColliders: 1
   _topHalfLock: 0
   _botHalfLock: 0
+  _topHalfRotation: 1
+  _botHalfRotation: 0
 --- !u!43 &1181103523
 Mesh:
   m_ObjectHideFlags: 0
@@ -54376,6 +54384,8 @@ MonoBehaviour:
   _removeColliders: 0
   _topHalfLock: 0
   _botHalfLock: 0
+  _topHalfRotation: 0
+  _botHalfRotation: 0
 --- !u!64 &1296164046
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -92787,6 +92797,8 @@ MonoBehaviour:
   _removeColliders: 0
   _topHalfLock: 0
   _botHalfLock: 0
+  _topHalfRotation: 0
+  _botHalfRotation: 0
 --- !u!114 &1571709553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96113,6 +96125,8 @@ MonoBehaviour:
   _removeColliders: 0
   _topHalfLock: 0
   _botHalfLock: 0
+  _topHalfRotation: 0
+  _botHalfRotation: 0
 --- !u!64 &1887420052
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -56,6 +56,15 @@ public class Sliceable : MonoBehaviour
     [Tooltip("Lock movement of bot half")]
     private bool _botHalfLock;
 
+    [Header("Rotation Locking")]
+    [SerializeField]
+    [Tooltip("Lock rotation of top half")]
+    private bool _topHalfRotation;
+
+    [SerializeField]
+    [Tooltip("Lock rotation of bot half")]
+    private bool _botHalfRotation;
+
     public bool IsSolid
     {
         get
@@ -216,6 +225,30 @@ public class Sliceable : MonoBehaviour
         set
         {
             _botHalfLock = value;
+        }
+    }
+
+    public bool TopHalfRotation
+    {
+        get
+        {
+            return _topHalfRotation;
+        }
+        set
+        {
+            _topHalfRotation = value;
+        }
+    }
+
+    public bool BotHalfRotation
+    {
+        get
+        {
+            return _botHalfRotation;
+        }
+        set
+        {
+            _botHalfRotation = value;
         }
     }
 

@@ -52,6 +52,9 @@ public class Beam : MonoBehaviour
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
 
+    private Color _cuttingColor = Color.red;
+    private Color _cutColor = Color.green;
+
     private bool _ableToSliceObj;
 
     [SerializeField]
@@ -161,7 +164,12 @@ public class Beam : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("enter");
+        //Debug.Log("enter");
+        if (other.GetComponent<Sliceable>() != null)
+        {
+            other.GetComponent<Renderer>().material.color = _cuttingColor;
+        }
+
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
     }
@@ -226,6 +234,14 @@ public class Beam : MonoBehaviour
                 sliceable.ShareVertices = T.ShareVertices;
                 sliceable.Despawn = T.Despawn;
                 sliceable.RemoveColliders = T.RemoveColliders;
+                sliceable.TopHalfLock = T.TopHalfLock;
+                sliceable.BotHalfLock = T.BotHalfLock;
+                sliceable.BotHalfDespawn = T.BotHalfDespawn;
+                sliceable.TopHalfDespawn = T.TopHalfDespawn;
+                sliceable.TopHalfRotation = T.TopHalfRotation;
+                sliceable.BotHalfRotation = T.BotHalfRotation;
+
+                slice.GetComponent<Renderer>().material.color = _cutColor;
 
                 // Adds slippery mat
                 //slice.GetComponent<MeshCollider>().material = _slipperyMat;
@@ -235,6 +251,10 @@ public class Beam : MonoBehaviour
                     sliceable.DisableColliders();
                 }
 
+                sliceable.gameObject.layer = LayerMask.NameToLayer("Ground");
+                //slices[0].layer = LayerMask.NameToLayer("Ground");
+                //slices[1].layer = LayerMask.NameToLayer("Ground");
+
                 Sliceable otherSliceable = other.GetComponent<Sliceable>();
                 if (otherSliceable.TopHalfDespawn && otherSliceable.GetComponent<Sliceable>().BotHalfDespawn || otherSliceable.GetComponent<Sliceable>().Despawn)
                 {
@@ -242,7 +262,7 @@ public class Beam : MonoBehaviour
                     sliceable.DespawnAfter = T.DespawnAfter;
                     sliceable.DespawnSelf();
                 }
-                else if(otherSliceable.TopHalfDespawn)
+                else if (otherSliceable.TopHalfDespawn)
                 {
                     Debug.Log(slices[0].name);
                     slices[0].GetComponent<Sliceable>().DespawnAfter = T.DespawnAfter;
@@ -255,13 +275,22 @@ public class Beam : MonoBehaviour
                     slices[1].GetComponent<Sliceable>().DespawnSelf();
                 }
 
-                if(otherSliceable.TopHalfLock)
+                if (otherSliceable.TopHalfLock)
                 {
                     slices[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 }
-                if(otherSliceable.BotHalfLock)
+                if (otherSliceable.BotHalfLock)
                 {
                     slices[1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                }
+
+                if (otherSliceable.TopHalfRotation)
+                {
+                    slices[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                }
+                if (otherSliceable.BotHalfRotation)
+                {
+                    slices[1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 }
             }
 
