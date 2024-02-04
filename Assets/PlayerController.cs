@@ -1,3 +1,11 @@
+/*****************************************************************************
+// File Name :         PlayerController.cs
+// Author :            Nick Grinsteasd
+// Creation Date :     
+//
+// Brief Description : A 3D player controller with options to jump and cut with
+                       a laser.
+*****************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -65,6 +73,10 @@ public class PlayerController : MonoBehaviour
         slash.canceled += ctx => StartZoom(false);
     }
 
+    /// <summary>
+    /// Initiates a camera zoom when inputs are recieved
+    /// </summary>
+    /// <param name="zoomingIn">Determines which coroutine to start</param>
     private void StartZoom(bool zoomingIn)
     {
         StopAllCoroutines();
@@ -75,6 +87,9 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ZoomOut());
     }
 
+    /// <summary>
+    /// Zooms the camera from defaultFOV to cutCameraFOV
+    /// </summary>
     IEnumerator ZoomIn()
     {
         float interpolationVal = 0;
@@ -94,6 +109,9 @@ public class PlayerController : MonoBehaviour
         mainCamera.m_Lens.FieldOfView = defaultFOV;
     }
 
+    /// <summary>
+    /// Zooms the camera from cutCameraFOV back to defaultFOV
+    /// </summary>
     IEnumerator ZoomOut()
     {
         float interpolationVal = 0;
