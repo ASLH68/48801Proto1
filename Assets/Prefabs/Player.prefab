@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58946de553462ec46aad589f2365e628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  jumpForce: 0.25
+  moveSpeed: 5
+  jumpForce: 2
   cutCameraDamping: 0.08
   cutCameraFOV: 40
   laser: {fileID: 0}

@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     CinemachineTransposer transposer;
     [SerializeField] GameObject laser;
 
+    bool isMoving = false;
     Vector2 moveDirection;
     Vector3 velocity;
 
@@ -60,7 +61,12 @@ public class PlayerController : MonoBehaviour
         quit = playerControls.FindAction("Quit");
 
         move.performed += ctx => moveDirection = move.ReadValue<Vector2>();
+        move.performed += ctx => isMoving = true;
         move.canceled += ctx => moveDirection = move.ReadValue<Vector2>();
+        move.canceled += ctx => isMoving = false;
+        //move.performed += ctx => rb.velocity = 
+        //    new Vector3(move.ReadValue<Vector2>().x * moveSpeed, rb.velocity.y, move.ReadValue<Vector2>().y * moveSpeed);
+        //move.canceled += ctx => rb.velocity = new Vector3(0, rb.velocity.y, 0);
 
         slash.performed += ctx => laser.SetActive(true);
         slash.performed += ctx => transposer.m_XDamping = transposer.m_YDamping = transposer.m_ZDamping = cutCameraDamping;
@@ -131,24 +137,32 @@ public class PlayerController : MonoBehaviour
         mainCamera.m_Lens.FieldOfView = cutCameraFOV;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Player Movement
-        velocity = transform.right * moveDirection.x + transform.forward * moveDirection.y;
-        velocity = velocity.normalized;
-        rb.AddForce(velocity * moveSpeed);
-
-        float speed = rb.velocity.magnitude;
-        if (speed > 5)
+        if (isMoving)
         {
-            float brakeSpeed = speed - 5;
-            Vector3 brakingVelocity = rb.velocity.normalized * brakeSpeed;
-            rb.AddForce(-brakingVelocity);
+            velocity = transform.right * moveDirection.x + transform.forward * moveDirection.y;
+            velocity = velocity.normalized;
+            velocity *= moveSpeed;
+            rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
+            //rb.AddForce(velocity * moveSpeed);
+        }
+        else
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
         }
 
-        // Ground Check
-        if (!isGrounded)
+//float speed = rb.velocity.magnitude;
+//if (speed > 5)
+//{
+//    float brakeSpeed = speed - 5;
+//    Vector3 brakingVelocity = rb.velocity.normalized * brakeSpeed;
+//    rb.AddForce(-brakingVelocity);
+//}
+
+// Ground Check
+if (!isGrounded)
             isGrounded = Physics.CheckSphere(groundChecker.position, groundDistance, groundMask);
 
         // Jump
