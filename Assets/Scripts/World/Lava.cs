@@ -8,7 +8,7 @@ public class Lava : MonoBehaviour
     public Dictionary<int, LavaWaypoint> waypointDict = new Dictionary<int, LavaWaypoint>();
 
     [SerializeField] private int currentWaypoint = 1;
-    [SerializeField] private float defaultSpeed;
+    [SerializeField] private float lavaRiseSpeed;
 
     public float lavaHeight = 0;
     public float playerDistanceFromLava;
@@ -27,6 +27,10 @@ public class Lava : MonoBehaviour
             if (currentWaypoint < waypointDict.Count)
             {
                 currentWaypoint++;
+                if ()
+                {
+                    lavaRiseSpeed += waypointDict[currentWaypoint].lavaSpeedChange
+                }
             }
             else
             {
@@ -35,7 +39,7 @@ public class Lava : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(new Vector3(0, transform.position.y, 0), new Vector3(0, waypointDict[currentWaypoint].transform.position.y, 0), defaultSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(new Vector3(0, transform.position.y, 0), new Vector3(0, waypointDict[currentWaypoint].transform.position.y, 0), lavaRiseSpeed * Time.deltaTime);
         }
     }
 
