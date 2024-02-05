@@ -61,12 +61,12 @@ public class Slicer : MonoBehaviour
         GameObject PositiveObj = CreateMeshGameObject(objectToCut);
         PositiveObj.name = string.Format("{0}_positive", objectToCut.name);
 
-        PositiveObj.transform.parent = objectToCut.transform.parent;
+        //PositiveObj.transform.parent = objectToCut.transform.parent;
        
         GameObject NegativeObj = CreateMeshGameObject(objectToCut);
         NegativeObj.name = string.Format("{0}_negative", objectToCut.name);
 
-        NegativeObj.transform.parent = objectToCut.transform.parent;
+        //NegativeObj.transform.parent = objectToCut.transform.parent;
 
         var positiveSideMeshData = slicesMeta.PositiveSideMesh;
         var negativeSideMeshData = slicesMeta.NegativeSideMesh;
@@ -93,6 +93,8 @@ public class Slicer : MonoBehaviour
             originalObject.GetComponent<MeshRenderer>().materials;
 
         GameObject meshGameObject = new GameObject();
+        meshGameObject.transform.parent = originalObject.transform.parent;
+
         Sliceable originalSliceable = originalObject.GetComponent<Sliceable>();
 
         meshGameObject.AddComponent<MeshFilter>();
