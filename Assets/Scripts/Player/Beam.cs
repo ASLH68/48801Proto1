@@ -113,6 +113,8 @@ public class Beam : MonoBehaviour
         //Set starting position for tip and base
         _previousTipPosition = _tip.transform.position;
         _previousBasePosition = _base.transform.position;
+
+        gameObject.SetActive(false);
     }
 
     void LateUpdate()
