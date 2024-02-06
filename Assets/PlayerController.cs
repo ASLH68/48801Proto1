@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
 
         rb = gameObject.GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<CinemachineVirtualCamera>();
