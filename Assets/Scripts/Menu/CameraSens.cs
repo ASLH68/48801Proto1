@@ -6,21 +6,21 @@ using Cinemachine;
 
 public class CameraSens : MonoBehaviour
 {
-    Slider settingsSlider;
+    //Slider settingsSlider;
 
-    private void Awake()
-    {
-        settingsSlider = GetComponent<Slider>();
+    //private void Awake()
+    //{
+    //    settingsSlider = GetComponent<Slider>();
 
-        if (settingsSlider != null)
-        {
-            CinemachineInputProvider.sensitivity = settingsSlider.value;
-        }
-    }
+    //    if (settingsSlider != null)
+    //    {
+    //        CinemachineInputProvider.sensitivity = settingsSlider.value;
+    //    }
+    //}
 
-    public void UpdateSensitivity()
-    {
-        CinemachineInputProvider.sensitivity = settingsSlider.value;
-    }
+    //public void UpdateSensitivity()
+    //{
+    //    CinemachineInputProvider.sensitivity = settingsSlider.value;
+    //}
 }
 
