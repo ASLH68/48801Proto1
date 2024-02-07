@@ -27,9 +27,9 @@ public class Lava : MonoBehaviour
             if (currentWaypoint < waypointDict.Count)
             {
                 currentWaypoint++;
-                if ()
+                if (waypointDict[currentWaypoint].lavaSpeedChange != 0)
                 {
-                    lavaRiseSpeed += waypointDict[currentWaypoint].lavaSpeedChange
+                    lavaRiseSpeed += waypointDict[currentWaypoint].lavaSpeedChange;
                 }
             }
             else

@@ -9,7 +9,8 @@ public class LavaSign : MonoBehaviour
     public TextMeshPro signText;
     void Awake()
     {
-        lavaBeans = GameObject.Find("Level/Lava/Beans");
+        lavaBeans = GameObject.Find("Lava/Beans");
+        //Debug.Log(lavaBeans.gameObject);
     }
 
     void Update()
