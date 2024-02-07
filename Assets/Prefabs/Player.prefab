@@ -164,7 +164,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 2
   cutCameraDamping: 0.08
-  cutCameraFOV: 40
+  cutCameraFOV: 50
   laser: {fileID: 0}
   groundMask:
     serializedVersion: 2
