@@ -3,62 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//Video used as reference: https://www.youtube.com/watch?v=hH0OYz7YtKk
-
 public class Lava : MonoBehaviour
 {
-    [SerializeField] private Transform[] waypoints;
-    [SerializeField] private float defaultSpeed;
-    [SerializeField] private float checkDistance = 0.05f;
+    public Dictionary<int, LavaWaypoint> waypointDict = new Dictionary<int, LavaWaypoint>();
 
-    [SerializeField] private Transform targetWaypoint;
-    [SerializeField] private int currentWaypointIndex = 0;
+    [SerializeField] private int currentWaypoint = 1;
+    [SerializeField] private float lavaRiseSpeed;
 
-    public float distanceFromLava;
+    public float lavaHeight = 0;
+    public float playerDistanceFromLava;
 
-    public GameObject playerReference;
-
-    void Start()
-    {
-        targetWaypoint = waypoints[0];
-    }
+    public GameObject Player;
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, defaultSpeed * Time.deltaTime);
+        //Debug.Log("Player pos" + Mathf.Round(Player.transform.position.y * 100f) / 100f);
+        lavaHeight = Mathf.Round(transform.position.y * 100f) / 100f;
+        //Debug.Log("Lava pos" + Mathf.Round(Player.transform.position.y * 100f) / 100f);
+        playerDistanceFromLava = Mathf.Round((Player.transform.position.y - lavaHeight - 0.85f) * 100f) / 100f;
 
-        if (Vector3.Distance(transform.position, targetWaypoint.position) < checkDistance )
+        if (transform.position.y >= waypointDict[currentWaypoint].transform.position.y)
         {
-            targetWaypoint = GetNextWaypoint();
+            if (currentWaypoint < waypointDict.Count)
+            {
+                currentWaypoint++;
+                if (waypointDict[currentWaypoint].lavaSpeedChange != 0)
+                {
+                    lavaRiseSpeed += waypointDict[currentWaypoint].lavaSpeedChange;
+                }
+            }
+            else
+            {
+                //Debug.Log("max lava height reached");
+            }
         }
-
-        //how far the player is from the lava
-        //Debug.Log("distance from death " + (playerReference.transform.position.y - transform.position.y - 0.75f).ToString("F2"));
-        distanceFromLava = Mathf.Round((playerReference.transform.position.y - transform.position.y - 0.75f) * 100f) / 100f;
-
-        //Debug.Log("lava pos y" + transform.position.y);
-        //Debug.Log(playerReference.transform.position.y);
-
-        if (transform.position.y > playerReference.transform.position.y - 0.75f)
+        else
         {
-            //Debug.Log("dead, dead as hell");
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            transform.position = Vector3.MoveTowards(new Vector3(0, transform.position.y, 0), new Vector3(0, waypointDict[currentWaypoint].transform.position.y, 0), lavaRiseSpeed * Time.deltaTime);
         }
     }
 
-    private Transform GetNextWaypoint() 
+    private void Awake()
     {
-        //Debug.Log(waypoints.Length);
-        if (currentWaypointIndex >= waypoints.Length)
-        {
-            //Debug.Log("lava is at max height");
-            return waypoints[waypoints.Length - 1];
-        }
-        else if(currentWaypointIndex < waypoints.Length - 1)
-        {
-            currentWaypointIndex++;
-        }
-        //Debug.Log(currentWaypointIndex);
-        return waypoints[currentWaypointIndex];
+        Player = GameObject.Find("Player");
+    }
+
+    public void AddNewWaypoint(int waypointId, LavaWaypoint thisWaypoint)
+    {
+        //called by each waypoint to add itself to this dictionary
+        waypointDict.Add(waypointId, thisWaypoint);
     }
 }
