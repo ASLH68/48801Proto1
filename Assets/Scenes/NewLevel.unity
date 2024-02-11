@@ -58629,15 +58629,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1435518836063171219, guid: c762b2d118abde84d8fdc2fc2089b2e3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.822
+      value: -7.404
       objectReference: {fileID: 0}
     - target: {fileID: 1435518836063171219, guid: c762b2d118abde84d8fdc2fc2089b2e3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.103
+      value: -29.367
       objectReference: {fileID: 0}
     - target: {fileID: 1435518836063171219, guid: c762b2d118abde84d8fdc2fc2089b2e3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.604
+      value: -11.594
       objectReference: {fileID: 0}
     - target: {fileID: 1435518836063171219, guid: c762b2d118abde84d8fdc2fc2089b2e3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -58699,6 +58699,7 @@ MonoBehaviour:
   - {fileID: 106506318}
   - {fileID: 1188806340}
   _endZones: {fileID: 1527215610}
+  _displayMessage: {fileID: 0}
 --- !u!43 &1325682622
 Mesh:
   m_ObjectHideFlags: 0
