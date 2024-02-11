@@ -67,7 +67,7 @@ Material:
     - _LavaColor: {r: 1.7358495, g: 0.209029, b: 0, a: 1}
     - _LavaNormalSpeed: {r: 0, g: 0.05, b: 0, a: 0}
     - _LavaRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _LavaScale: {r: 5, g: 5, b: 0, a: 0}
+    - _LavaScale: {r: 15, g: 15, b: 0, a: 0}
     - _LavaSpeed: {r: 0.05, g: 0.1, b: 0, a: 0}
     - _VoronoiSpeed: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
