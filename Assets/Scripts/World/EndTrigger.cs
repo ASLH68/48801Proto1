@@ -9,6 +9,8 @@ public class EndTrigger : MonoBehaviour
     [SerializeField] ParticleSystem[] _eruption;
     [SerializeField] GameObject _endZones;
     [SerializeField] GameObject _displayMessage;
+    [SerializeField] GameObject _messageBackground;
+    [SerializeField] AnimationClip _clip;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,6 +36,8 @@ public class EndTrigger : MonoBehaviour
     private IEnumerator EndMessage()
     {
         yield return new WaitForSeconds(1.5f);
+        _messageBackground.SetActive(true);
+        yield return new WaitForSeconds(_clip.length);
         _displayMessage.SetActive(true);
-    }
+    }   
 }
