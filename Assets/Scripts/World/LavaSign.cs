@@ -16,6 +16,6 @@ public class LavaSign : MonoBehaviour
     void Update()
     {
         //Debug.Log(lavaBeans.gameObject.GetComponent<Lava>().lavaHeight.ToString());
-        signText.text = "Lava height: " + lavaBeans.gameObject.GetComponent<Lava>().lavaHeight.ToString();
+        signText.text = "Lava height: " + lavaBeans.gameObject.GetComponent<Lava>().lavaHeight.ToString("F1");
     }
 }
