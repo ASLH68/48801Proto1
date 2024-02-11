@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Level.unity
     guid: 28a4af1519566c04bb6eaa12fb66ed8d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SeesawIteration.unity
     guid: c5bb01e9d32af5f4c81a25e50bf0db5e
+  - enabled: 1
+    path: Assets/Scenes/NewLevel.unity
+    guid: 950132c05c29ff54a84331bd94a383ee
   m_configObjects: {}
