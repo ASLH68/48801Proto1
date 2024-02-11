@@ -8,6 +8,7 @@ public class EndTrigger : MonoBehaviour
     [SerializeField] GameObject _camPanning;
     [SerializeField] ParticleSystem[] _eruption;
     [SerializeField] GameObject _endZones;
+    [SerializeField] GameObject _displayMessage;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,5 +28,12 @@ public class EndTrigger : MonoBehaviour
         {
             syst.Play();
         }
+        StartCoroutine(EndMessage());
+    }
+
+    private IEnumerator EndMessage()
+    {
+        yield return new WaitForSeconds(1.5f);
+        _displayMessage.SetActive(true);
     }
 }
