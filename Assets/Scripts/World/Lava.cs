@@ -53,4 +53,15 @@ public class Lava : MonoBehaviour
         //called by each waypoint to add itself to this dictionary
         waypointDict.Add(waypointId, thisWaypoint);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // This resets the level after the player touches the lava
+        if (other.gameObject.tag == "Player")
+        {
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentScene);
+        }
+
+    }
 }
