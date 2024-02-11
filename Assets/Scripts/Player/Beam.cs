@@ -11,6 +11,7 @@ public class Beam : MonoBehaviour
     private static Beam _instance;
     //The number of vertices to create per frame
     private const int NUM_VERTICES = 12;
+    [SerializeField] float _laserRange;
 
     [SerializeField]
     [Tooltip("The blade object")]
@@ -316,9 +317,9 @@ public class Beam : MonoBehaviour
 
     private void Update()
     {
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * 50f;
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * _laserRange;
 
-        if (Physics.Raycast(GameObject.Find("Base").transform.position, forward, out RaycastHit hit, 50f))
+        if (Physics.Raycast(GameObject.Find("Base").transform.position, forward, out RaycastHit hit, _laserRange))
         {
             //Debug.Log(hit.transform.gameObject);
             GameObject tip = GameObject.Find("Tip");

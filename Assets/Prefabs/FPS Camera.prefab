@@ -277,11 +277,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5986512087537727739, guid: c6d42f41510f6d44bbd935b8509808a3, type: 3}
       propertyPath: m_VersionIndex
-      value: 308
+      value: 314
       objectReference: {fileID: 0}
     - target: {fileID: 7249675735031658565, guid: c6d42f41510f6d44bbd935b8509808a3, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249675735031658569, guid: c6d42f41510f6d44bbd935b8509808a3, type: 3}
+      propertyPath: _laserRange
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7249675735031658569, guid: c6d42f41510f6d44bbd935b8509808a3, type: 3}
       propertyPath: _slipperyMat
