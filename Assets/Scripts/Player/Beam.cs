@@ -261,7 +261,7 @@ public class Beam : MonoBehaviour
                 Sliceable otherSliceable = other.GetComponent<Sliceable>();
                 if (otherSliceable.TopHalfDespawn && otherSliceable.GetComponent<Sliceable>().BotHalfDespawn || otherSliceable.GetComponent<Sliceable>().Despawn)
                 {
-                    Debug.Log("test");
+                    //Debug.Log("test");
                     sliceable.DespawnAfter = T.DespawnAfter;
                     sliceable.DespawnSelf();
                 }
@@ -294,6 +294,12 @@ public class Beam : MonoBehaviour
                 if (otherSliceable.BotHalfRotation)
                 {
                     slices[1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                }
+
+                if (otherSliceable.TagName != null && otherSliceable.TagName != "")
+                {
+                    slices[0].tag = otherSliceable.TagName;
+                    slices[1].tag = otherSliceable.TagName;
                 }
             }
 

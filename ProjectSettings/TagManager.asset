@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - EndTrigger
+  - Bridge1
   layers:
   - Default
   - TransparentFX

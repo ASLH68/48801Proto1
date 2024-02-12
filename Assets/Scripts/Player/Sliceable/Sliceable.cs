@@ -65,6 +65,9 @@ public class Sliceable : MonoBehaviour
     [Tooltip("Lock rotation of bot half")]
     private bool _botHalfRotation;
 
+    [SerializeField]
+    private string _tagName;
+
     public bool IsSolid
     {
         get
@@ -249,6 +252,18 @@ public class Sliceable : MonoBehaviour
         set
         {
             _botHalfRotation = value;
+        }
+    }
+
+    public string TagName
+    {
+        get
+        {
+            return _tagName;
+        }
+        set
+        {
+            _tagName = value;
         }
     }
 
