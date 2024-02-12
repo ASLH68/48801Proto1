@@ -3736,6 +3736,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &80725197
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4157,6 +4158,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &104381168
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6386,6 +6388,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &216492432
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6515,6 +6518,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!114 &226884971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9035,6 +9039,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!64 &257449052
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12217,6 +12222,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!64 &346293089
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17798,6 +17804,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!43 &399458969
 Mesh:
   m_ObjectHideFlags: 0
@@ -19063,6 +19070,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!43 &405960512
 Mesh:
   m_ObjectHideFlags: 0
@@ -20355,6 +20363,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &426105438
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -20481,6 +20490,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &431425229
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -20610,6 +20620,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!114 &437890072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21497,6 +21508,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &444993372
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -23103,6 +23115,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &489257741
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -27192,6 +27205,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &558735325
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -28350,6 +28364,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &600391627
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -28414,6 +28429,68 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600391624}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &602014366
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1587204399}
+    m_Modifications:
+    - target: {fileID: 3290457100267537346, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_Name
+      value: Bridge Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.396
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9799905
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00013730324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.19904484
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.000025204552
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+--- !u!4 &602014367 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3290457100267537349, guid: a253f097c2ce1c942915f5bc128a8935, type: 3}
+  m_PrefabInstance: {fileID: 602014366}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &609739642
 GameObject:
   m_ObjectHideFlags: 0
@@ -29639,6 +29716,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &636473094
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -32840,6 +32918,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!64 &726067972
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -33947,6 +34026,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!64 &745252580
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -35642,6 +35722,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &758665073
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -36217,6 +36298,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &785950080
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -37197,6 +37279,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!114 &792882634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38086,6 +38169,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!64 &799011588
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40630,6 +40714,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!114 &843174770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44871,6 +44956,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &898233651
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -47239,7 +47325,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh50062
+  m_Name: pb_Mesh82786
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -49011,6 +49097,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &987904816
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -49140,6 +49227,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!114 &991746561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51218,6 +51306,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1014103225
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -51344,6 +51433,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1014215006
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -55996,6 +56086,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!1 &1235211972
 GameObject:
   m_ObjectHideFlags: 0
@@ -56058,6 +56149,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1235211975
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -57428,6 +57520,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!1 &1266343264
 GameObject:
   m_ObjectHideFlags: 0
@@ -63240,6 +63333,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1421259494
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -64854,6 +64948,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1440001984
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -64980,6 +65075,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1442011402
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -65108,6 +65204,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!64 &1456211832
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -66149,6 +66246,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1470834888
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -68430,6 +68528,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1535385184
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -70302,6 +70401,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!114 &1553697691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72546,6 +72646,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1577403795
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -74808,7 +74909,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1587204399}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -89.903, y: 0, z: -21.716}
 --- !u!1 &1587204398
 GameObject:
@@ -74841,6 +74942,7 @@ Transform:
   - {fileID: 2101063308}
   - {fileID: 1556145241}
   - {fileID: 1901902024}
+  - {fileID: 602014367}
   - {fileID: 1654411354}
   - {fileID: 1585014100}
   m_Father: {fileID: 7931174}
@@ -77235,6 +77337,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1649966932
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -77597,7 +77700,7 @@ GameObject:
   - component: {fileID: 1654411348}
   m_Layer: 3
   m_Name: Bridge
-  m_TagString: Untagged
+  m_TagString: Bridge1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77629,6 +77732,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: Bridge1
 --- !u!64 &1654411349
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -77951,7 +78055,7 @@ Transform:
   m_Children:
   - {fileID: 1134912647}
   m_Father: {fileID: 1587204399}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -201.251, z: 98.154}
 --- !u!43 &1657426664
 Mesh:
@@ -78958,6 +79062,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1674174758
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -80035,6 +80140,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!1 &1701830247
 GameObject:
   m_ObjectHideFlags: 0
@@ -80297,6 +80403,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!64 &1707242197
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -82226,6 +82333,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!114 &1745449099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84051,6 +84159,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!114 &1817471598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88345,6 +88454,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1851519071
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -88471,6 +88581,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1864562025
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -88600,6 +88711,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!64 &1868867631
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -89961,6 +90073,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1882572871
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -91383,6 +91496,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &1964408812
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -92507,6 +92621,7 @@ MonoBehaviour:
   _botHalfLock: 1
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!64 &1971314616
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -95638,6 +95753,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &2029455038
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -95767,6 +95883,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!114 &2033431387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97579,6 +97696,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &2084473075
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -99792,6 +99910,7 @@ MonoBehaviour:
   _botHalfLock: 0
   _topHalfRotation: 0
   _botHalfRotation: 0
+  _tagName: 
 --- !u!136 &2139491321
 CapsuleCollider:
   m_ObjectHideFlags: 0
