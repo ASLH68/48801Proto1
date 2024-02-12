@@ -17,6 +17,7 @@ public class EndTrigger : MonoBehaviour
         if (other.gameObject.CompareTag("EndTrigger"))
         {
             StartCoroutine(StartVolcano());
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             _camPanning.SetActive(true);
             Destroy(_endZones);
         }
