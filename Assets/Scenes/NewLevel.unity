@@ -21468,6 +21468,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3805617469950495050, guid: ad4dc4d85f833be429a4c8adb620c61a, type: 3}
+      propertyPath: m_VerticalAxis.m_AccelTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805617469950495050, guid: ad4dc4d85f833be429a4c8adb620c61a, type: 3}
+      propertyPath: m_VerticalAxis.m_DecelTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805617469950495050, guid: ad4dc4d85f833be429a4c8adb620c61a, type: 3}
+      propertyPath: m_HorizontalAxis.m_AccelTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805617469950495050, guid: ad4dc4d85f833be429a4c8adb620c61a, type: 3}
+      propertyPath: m_HorizontalAxis.m_DecelTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3805617470521228551, guid: ad4dc4d85f833be429a4c8adb620c61a, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -21522,7 +21538,7 @@ PrefabInstance:
       objectReference: {fileID: 1072532080}
     - target: {fileID: 4982878826571448700, guid: ad4dc4d85f833be429a4c8adb620c61a, type: 3}
       propertyPath: m_VersionIndex
-      value: 311
+      value: 314
       objectReference: {fileID: 0}
     - target: {fileID: 8263794469284561346, guid: ad4dc4d85f833be429a4c8adb620c61a, type: 3}
       propertyPath: m_Mesh
@@ -21532,7 +21548,8 @@ PrefabInstance:
       propertyPath: _laserRange
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3805617469950495053, guid: ad4dc4d85f833be429a4c8adb620c61a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ad4dc4d85f833be429a4c8adb620c61a, type: 3}
 --- !u!1 &469238390
 GameObject:
@@ -51724,13 +51741,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070895835}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1072156980 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3805617469950495055, guid: ad4dc4d85f833be429a4c8adb620c61a, type: 3}
+  m_PrefabInstance: {fileID: 454645188}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1072156985
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072156980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BindingMode: 1
+  m_FollowOffset: {x: 0, y: 0, z: -1.6}
+  m_XDamping: 0.2
+  m_YDamping: 0.2
+  m_ZDamping: 0.2
+  m_AngularDampingMode: 0
+  m_PitchDamping: 0
+  m_YawDamping: 0
+  m_RollDamping: 0
+  m_AngularDamping: 0
 --- !u!43 &1072532080
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28816
+  m_Name: pb_Mesh158756
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -77864,7 +77908,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
+    m_Style: 0
     m_Time: 2
     m_CustomCurve:
       serializedVersion: 2
